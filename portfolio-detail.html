@@ -9,11 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --void:#0C0A08;
-  --paper:#EDE8DF;
-  --red:#C80000;
-  --mute:#5A5248;
-  --rule:#1E1C19;
+  --void:#FFD100;
+  --paper:#000000;
+  --red:#E31837;
+  --mute:#7A6B00;
+  --rule:rgba(0,0,0,.15);
   --ease:cubic-bezier(.22,1,.36,1);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -32,7 +32,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;}
 body::after{
   content:"";position:fixed;inset:0;
   pointer-events:none;z-index:999;
-  opacity:.065;mix-blend-mode:screen;
+  opacity:.065;mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 }
 

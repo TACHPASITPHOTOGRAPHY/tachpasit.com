@@ -9,12 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --void:#0C0A08;
-  --paper:#EDE8DF;
-  --red:#C80000;
-  --mid:#201E1B;
-  --mute:#5A5248;
-  --rule:#1E1C19;
+  --void:#FFD100;
+  --paper:#000000;
+  --red:#E31837;
+  --mute:#7A6B00;
+  --rule:rgba(0,0,0,.15);
   --ease:cubic-bezier(.22,1,.36,1);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -28,136 +27,94 @@ body{
 }
 a{color:inherit;text-decoration:none;}
 img{display:block;width:100%;height:100%;object-fit:cover;}
-::selection{background:var(--red);color:var(--paper);}
+::selection{background:var(--paper);color:var(--void);}
 
-/* grain — screen blend, warm gelatin feel */
 body::after{
   content:"";position:fixed;inset:0;
   pointer-events:none;z-index:999;
-  opacity:.065;mix-blend-mode:screen;
+  opacity:.065;mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 }
 
-/* scan-line photo texture */
-.ph{
-  background:var(--mid);
-  background-image:repeating-linear-gradient(
-    0deg,transparent,transparent 2px,
-    rgba(255,255,255,.004) 2px,rgba(255,255,255,.004) 3px
-  );
-}
-
-/* reveal */
 [data-r]{opacity:0;transform:translateY(18px);transition:opacity .85s var(--ease),transform .85s var(--ease);}
 [data-r].in{opacity:1;transform:none;}
-[data-r][data-d="1"]{transition-delay:.1s;}
-[data-r][data-d="2"]{transition-delay:.2s;}
-[data-r][data-d="3"]{transition-delay:.3s;}
 @media(prefers-reduced-motion:reduce){[data-r]{opacity:1;transform:none;transition:none;}}
 
 /* ── NAV ── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:500;
-  padding:16px 5vw;
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
+  background:var(--void);border-bottom:1px solid var(--rule);
+  padding:14px 5vw;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
 }
-.nav-logo{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:1.4rem;letter-spacing:.28em;color:var(--paper);
-  opacity:.85;transition:opacity .2s;
-  text-align:center;
-}
-.nav-logo:hover{opacity:1;}
 .nav-left a{
   font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;
   color:var(--mute);transition:color .2s;
-  border-bottom:1px solid var(--rule);padding-bottom:1px;
 }
-.nav-left a:hover{color:var(--paper);border-color:var(--paper);}
-.nav-right{
-  display:flex;align-items:center;gap:18px;justify-content:flex-end;
+.nav-left a:hover{color:var(--paper);}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.2rem;letter-spacing:.28em;color:var(--paper);
+  text-align:center;opacity:.8;transition:opacity .2s;
 }
-.nav-right a{
-  font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--mute);transition:color .2s;
-}
+.nav-logo:hover{opacity:1;}
+.nav-right{display:flex;align-items:center;gap:18px;justify-content:flex-end;}
+.nav-right a{font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);transition:color .2s;}
 .nav-right a:hover{color:var(--paper);}
 .nav-right a.wa{color:var(--red);}
 .nav-right a.wa:hover{color:var(--paper);}
 
-/* ══════════════════════════════
-   HERO — collage / zine cover
-══════════════════════════════ */
+/* ── HERO ── */
 .hero{
   background:var(--void);
-  height:clamp(420px, 70vh, 680px);
-  display:flex;flex-direction:column;
-  justify-content:flex-end;
+  height:clamp(420px,70vh,680px);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding-top:54px;border-bottom:1px solid var(--rule);
   overflow:hidden;
 }
 .hero-hl{padding:0 5vw 5vh;}
-.hero-hl-row{
-  display:flex;
-  align-items:flex-end;
-  gap:5vw;
-}
+.hero-hl-row{display:flex;align-items:flex-end;gap:5vw;}
 .hero-hl h1{
   font-family:'Bebas Neue',sans-serif;
   font-size:clamp(4.5rem,16vw,13rem);
-  line-height:.82;letter-spacing:-.01em;
-  color:var(--paper);
-  flex-shrink:0;
+  line-height:.82;letter-spacing:-.01em;color:var(--paper);flex-shrink:0;
 }
 .hero-hl h1 .dot{color:var(--red);}
 .portfolio-link{
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(1.4rem,3.5vw,2.8rem);
-  letter-spacing:.06em;
-  color:var(--paper);
-  border:1px solid rgba(237,232,223,.25);
-  padding:.4em .7em;
-  display:flex;align-items:center;gap:.3em;
-  margin-bottom:.18em;
-  transition:background .2s,color .2s,border-color .2s;
-  white-space:nowrap;
+  font-size:clamp(1.4rem,3.5vw,2.8rem);letter-spacing:.06em;
+  color:var(--paper);border:1px solid rgba(237,232,223,.25);
+  padding:.4em .7em;display:flex;align-items:center;gap:.3em;
+  margin-bottom:.18em;white-space:nowrap;
+  transition:background .2s,color .2s;
 }
 .portfolio-link span{color:var(--red);}
-.portfolio-link:hover{background:var(--paper);color:var(--void);}
+.portfolio-link:hover{background:#000;color:var(--void);}
 .portfolio-link:hover span{color:var(--void);}
 .hero-foot{
   display:flex;justify-content:space-between;align-items:flex-end;
   margin-top:14px;padding-top:12px;
-  border-top:1px solid rgba(237,232,223,.15);
-  flex-wrap:wrap;gap:10px;
+  border-top:1px solid rgba(237,232,223,.12);flex-wrap:wrap;gap:10px;
 }
 .hero-dek{font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);}
 .hero-cta{
   font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--red);border:1px solid var(--red);
-  padding:8px 16px;transition:background .2s,color .2s;
+  color:var(--red);border:1px solid var(--red);padding:8px 16px;
+  transition:background .2s,color .2s;
 }
-.hero-cta:hover{background:var(--red);color:var(--paper);}
+.hero-cta:hover{background:var(--paper);color:var(--void);}
 
-/* ══════════════════════════════
-   TICKER
-══════════════════════════════ */
+/* ── TICKER ── */
 .ticker{
-  overflow:hidden;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
-  padding:7px 0;background:var(--void);
+  background:var(--void);overflow:hidden;
+  border-bottom:1px solid var(--rule);padding:7px 0;
 }
 .tick-track{display:flex;white-space:nowrap;animation:tick 26s linear infinite;}
-.tick-track span{
-  font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--rule);padding:0 3vw;
-}
-.tick-track span.r{color:var(--red);}
+.tick-track span{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rule);padding:0 3vw;}
+.tick-track span.r{color:var(--void);}
 @keyframes tick{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
-/* ══════════════════════════════
-   WORK — assembled grid
-══════════════════════════════ */
+/* ── WORK ── */
 .work{background:var(--void);}
 .work-head{
   padding:28px 5vw 16px;
@@ -167,187 +124,158 @@ nav{
 .work-head-l{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--paper);}
 .work-head-r{font-size:.46rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);}
 
-/* assembled layout: full-width → 5-col strip → asymmetric → 3-col */
 .wg{display:grid;gap:2px;background:var(--rule);}
 .wg-wide{grid-template-columns:1fr;}
 .wg-5{grid-template-columns:repeat(5,1fr);}
 .wg-asym{grid-template-columns:.6fr 1fr;}
-.wg-asym2{grid-template-columns:1fr 1fr .7fr;}
 .wg-3{grid-template-columns:repeat(3,1fr);}
 
 .pf{position:relative;overflow:hidden;}
-.pf:hover .pf-cap{transform:translateY(0);}
-.pf-n{
-  position:absolute;top:7px;left:8px;z-index:2;
-  font-size:.4rem;letter-spacing:.08em;
-  color:rgba(30,28,25,.6);
-  mix-blend-mode:screen;
+.pf .ph-inner{
+  position:absolute;inset:0;background:#181512;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.004) 2px,rgba(255,255,255,.004) 3px);
 }
+.pf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.18) grayscale(1);transition:transform .7s var(--ease);}
+.pf:hover img{transform:scale(1.04);}
+.pf-n{position:absolute;top:7px;left:8px;z-index:2;font-size:.4rem;letter-spacing:.08em;color:rgba(30,28,25,.6);mix-blend-mode:multiply;}
 .pf-cap{
   position:absolute;bottom:0;left:0;right:0;z-index:2;
-  padding:7px 9px 6px;
-  background:rgba(12,10,8,.85);
-  border-top:1px solid var(--rule);
-  transform:translateY(100%);
-  transition:transform .25s var(--ease);
+  padding:7px 9px 6px;background:rgba(12,10,8,.85);border-top:1px solid var(--rule);
+  transform:translateY(100%);transition:transform .25s var(--ease);
 }
-.pf-cap .v{
-  display:block;font-family:'Bebas Neue',sans-serif;
-  font-size:.82rem;letter-spacing:.05em;color:var(--paper);margin-bottom:1px;
-}
+.pf:hover .pf-cap{transform:none;}
+.pf-cap .v{display:block;font-family:'Bebas Neue',sans-serif;font-size:.82rem;letter-spacing:.05em;color:var(--paper);margin-bottom:1px;}
 .pf-cap .d{font-size:.42rem;letter-spacing:.1em;color:var(--mute);}
 
-/* aspect ratios */
-.ar-4-3{aspect-ratio:4/3;}
-.ar-3-4{aspect-ratio:3/4;}
-.ar-1-1{aspect-ratio:1;}
-.ar-21-7{aspect-ratio:21/7;}
-.ar-5-3{aspect-ratio:5/3;}
-.ar-16-9{aspect-ratio:16/9;}
+.r-4-5{aspect-ratio:4/5;} .r-5-4{aspect-ratio:5/4;}
+.r-3-2{aspect-ratio:3/2;} .r-2-3{aspect-ratio:2/3;} .r-1-1{aspect-ratio:1/1;}
 
-/* alternating dark tones */
-.t1{background:#1C1916;}
-.t2{background:#181512;}
-.t3{background:#141210;}
-.t4{background:#110F0D;}
-.t5{background:#0F0D0B;}
+.work-foot{
+  padding:10px 5vw;display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+}
+.work-foot span{font-size:.46rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);}
+.work-foot .r{color:var(--red);}
 
-/* ══════════════════════════════
-   ABOUT — combined
-══════════════════════════════ */
+/* ── ABOUT ── */
 .about{
   display:grid;grid-template-columns:1fr 1.5fr;
-  border-top:1px solid var(--rule);
   border-bottom:1px solid var(--rule);
+  background:var(--void);
 }
 .about-img{
   position:relative;overflow:hidden;
-  border-right:1px solid var(--rule);
-  min-height:520px;
+  border-right:1px solid var(--rule);min-height:520px;
 }
-.about-img .abb{bottom:0;top:auto;}
+.about-img .tag{
+  position:absolute;bottom:0;left:0;z-index:2;
+  background:var(--paper);color:var(--void);
+  font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 10px;font-family:'Space Mono',monospace;font-weight:700;
+}
+.about-img .ph-dark{
+  position:absolute;inset:0;background:#111;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.004) 2px,rgba(255,255,255,.004) 3px);
+}
 .about-txt{padding:52px 5vw;display:flex;flex-direction:column;justify-content:space-between;}
-.abt-eyebrow{
-  font-size:.46rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--red);margin-bottom:20px;display:block;
-}
-.abt-hl{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(2.2rem,5vw,4.4rem);
-  line-height:.88;color:var(--paper);
-  margin-bottom:28px;
-}
+.abt-eyebrow{font-size:.46rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:18px;display:block;}
+.abt-hl{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,4.4rem);line-height:.88;color:var(--paper);margin-bottom:26px;}
 .abt-hl .r{color:var(--red);}
 .abt-body{font-size:.65rem;line-height:2.1;color:var(--mute);}
-.abt-body strong{color:var(--paper);font-weight:700;}
+.abt-body strong{color:var(--paper);}
 .abt-body p+p{margin-top:1.3em;}
-.abt-rule{
-  width:32px;height:2px;background:var(--red);
-  margin:28px 0;
-}
-.abt-stats{
-  display:flex;gap:36px;
-  padding-top:22px;border-top:1px solid var(--rule);
-  flex-wrap:wrap;
-}
-.stat b{
-  display:block;font-family:'Bebas Neue',sans-serif;
-  font-size:2.6rem;color:var(--paper);line-height:.9;
-}
+.abt-rule{width:32px;height:2px;background:var(--red);margin:28px 0;}
+.abt-stats{display:flex;gap:36px;padding-top:22px;border-top:1px solid var(--rule);flex-wrap:wrap;}
+.stat b{display:block;font-family:'Bebas Neue',sans-serif;font-size:2.6rem;color:var(--paper);line-height:.9;}
 .stat b .r{color:var(--red);}
 .stat span{font-size:.44rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);}
 
-/* ══════════════════════════════
-   CONTACT
-══════════════════════════════ */
-.contact{padding:72px 5vw 60px;border-bottom:1px solid var(--rule);}
-.ct-hl{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(3rem,10vw,8rem);
-  line-height:.86;color:var(--paper);
-  margin-bottom:6px;
+/* ── PROCESS ── */
+.process{background:var(--void);padding:0;border-bottom:1px solid var(--rule);}
+.process-head{
+  padding:32px 5vw 14px;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  border-bottom:1px solid var(--rule);
 }
+.process-hl{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);color:var(--paper);}
+.process-hl .r{color:var(--red);}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);}
+.ps{padding:28px 24px 28px 0;border-right:1px solid var(--rule);}
+.ps:first-child{padding-left:5vw;}
+.ps:last-child{border-right:none;}
+.ps-n{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--red);line-height:1;margin-bottom:10px;}
+.ps-h{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.05em;color:var(--paper);margin-bottom:8px;}
+.ps p{font-size:.6rem;line-height:1.9;color:var(--mute);}
+
+/* ── CONTACT ── */
+.contact{background:var(--red);border-bottom:1px solid var(--rule);}
+.contact-inner{display:grid;grid-template-columns:1fr 1px 1fr;}
+.ct-divider{background:rgba(0,0,0,.15);}
+.contact-left{padding:60px 5vw;}
+.ct-hl{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,6vw,5rem);line-height:.88;color:var(--void);margin-bottom:6px;}
 .ct-email{
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(2rem,6vw,5rem);
-  line-height:.86;color:var(--red);
-  display:inline-block;
-  border-bottom:2px solid transparent;
-  transition:border-color .2s;
-  margin-bottom:36px;
+  font-size:clamp(1.6rem,4vw,3.2rem);line-height:.88;
+  color:var(--paper);display:inline-block;
+  border-bottom:2px solid transparent;transition:border-color .2s;margin-bottom:28px;
 }
-.ct-email:hover{border-color:var(--red);}
-.ct-meta{font-size:.58rem;line-height:2.4;color:var(--mute);margin-bottom:48px;}
-.ct-meta a{color:var(--mute);border-bottom:1px solid var(--rule);transition:color .2s,border-color .2s;}
-.ct-meta a:hover{color:var(--paper);border-color:var(--paper);}
-
-.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;border-top:1px solid var(--rule);padding-top:40px;}
-.ct-info-label{
-  font-size:.46rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--red);display:block;margin-bottom:14px;
-}
-.ct-info-body{font-size:.6rem;line-height:1.95;color:var(--mute);}
-
+.ct-email:hover{border-color:var(--paper);}
+.ct-meta{font-size:.58rem;line-height:2.4;color:rgba(0,0,0,.5);}
+.ct-meta a{border-bottom:1px solid rgba(0,0,0,.2);transition:color .2s,border-color .2s;}
+.ct-meta a:hover{color:var(--void);border-color:var(--void);}
+.contact-right{padding:60px 5vw;}
 form.eq{display:flex;flex-direction:column;gap:20px;}
-.fl label{
-  display:block;font-size:.46rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--mute);margin-bottom:5px;
-}
+.fl label{display:block;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,0,0,.45);margin-bottom:5px;}
 .fl input,.fl textarea{
-  width:100%;background:transparent;border:none;
-  border-bottom:1px solid var(--rule);
-  color:var(--paper);font-family:'Space Mono',monospace;
-  font-size:.68rem;padding:6px 0;resize:none;
-  transition:border-color .3s;
+  width:100%;background:transparent;border:none;border-bottom:1px solid rgba(0,0,0,.2);
+  color:#000;font-family:'Space Mono',monospace;font-size:.7rem;
+  padding:6px 0;resize:none;transition:border-color .3s;
 }
-.fl input::placeholder,.fl textarea::placeholder{color:var(--rule);}
-.fl input:focus,.fl textarea:focus{border-color:var(--paper);outline:none;}
+.fl input::placeholder,.fl textarea::placeholder{color:rgba(0,0,0,.25);}
+.fl input:focus,.fl textarea:focus{border-color:var(--void);outline:none;}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .btn-send{
-  font-family:'Space Mono',monospace;font-size:.54rem;
-  letter-spacing:.16em;text-transform:uppercase;
-  background:transparent;border:1px solid var(--paper);
-  color:var(--paper);padding:11px 22px;cursor:pointer;
-  transition:background .2s,color .2s;display:inline-block;
+  font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  background:#000;color:var(--void);border:none;
+  padding:11px 22px;cursor:pointer;transition:background .2s;display:inline-block;
 }
-.btn-send:hover{background:var(--paper);color:var(--void);}
-.form-ok{font-size:.52rem;letter-spacing:.1em;color:var(--red);margin-top:8px;display:none;}
+.btn-send:hover{background:#222;}
+.form-ok{font-size:.56rem;letter-spacing:.1em;color:#000;margin-top:8px;display:none;}
 .form-ok.show{display:block;}
 
-/* ══════════════════════════════
-   FOOTER
-══════════════════════════════ */
+/* ── FOOTER ── */
 footer{
-  padding:14px 5vw;
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:8px;
+  background:var(--void);padding:14px 5vw;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
 }
 footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rule);}
 .foot-r{display:flex;gap:0;}
 .foot-r a{
   font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--rule);padding:0 14px;border-left:1px solid var(--rule);
-  transition:color .2s;
+  color:var(--rule);padding:0 14px;border-left:1px solid var(--rule);transition:color .2s;
 }
-.foot-r a:hover{color:var(--paper);}
+.foot-r a:hover{color:var(--void);}
 
-/* ══════════════════════════════
-   RESPONSIVE
-══════════════════════════════ */
+/* ── RESPONSIVE ── */
 @media(max-width:900px){
-  .hero{min-height:420px;}
+  .hero-hl-row{flex-direction:column;align-items:flex-start;gap:12px;}
   .about{grid-template-columns:1fr;}
-  .about-img{min-height:280px;border-right:none;border-bottom:1px solid var(--rule);}
-  .ct-grid{grid-template-columns:1fr;gap:32px;}
-  .wg-asym,.wg-asym2{grid-template-columns:1fr 1fr;}
+  .about-img{min-height:300px;border-right:none;border-bottom:1px solid var(--rule);}
+  .process-steps{grid-template-columns:repeat(2,1fr);}
+  .ps:nth-child(2){border-right:none;}
+  .ps:nth-child(3){border-top:1px solid var(--rule);padding-top:24px;}
+  .contact-inner{grid-template-columns:1fr;}
+  .ct-divider{display:none;}
+  .contact-right{border-top:1px solid rgba(0,0,0,.15);}
   .two{grid-template-columns:1fr;}
+  .wg-asym{grid-template-columns:1fr 1fr;}
 }
-@media(max-width:640px){
-  .nav-r{display:none;}
-  .burger{display:flex;}
+@media(max-width:580px){
   .wg-5{grid-template-columns:repeat(3,1fr);}
   .wg-3{grid-template-columns:1fr 1fr;}
-  .wg-asym,.wg-asym2{grid-template-columns:1fr;}
+  .process-steps{grid-template-columns:1fr;}
+  .ps{border-right:none;border-bottom:1px solid var(--rule);padding:20px 5vw;}
+  .ps:last-child{border-bottom:none;}
 }
 </style>
 </head>
@@ -355,7 +283,7 @@ footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:va
 
 <nav>
   <div class="nav-left">
-    <a href="/gallery">Portfolio</a>
+    <a href="gallery.html">Portfolio</a>
   </div>
   <a href="#top" class="nav-logo">TACHPASIT</a>
   <div class="nav-right">
@@ -364,12 +292,11 @@ footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:va
   </div>
 </nav>
 
-<!-- ══ HERO — pure black, type only ══ -->
 <section class="hero" id="top">
-  <div class="hero-hl">
+  <div class="hero-hl" data-r>
     <div class="hero-hl-row">
       <h1>TACH<br>PASIT<span class="dot">.</span></h1>
-      <a href="/gallery" class="portfolio-link">Portfolio<span>→</span></a>
+      <a href="gallery.html" class="portfolio-link">Portfolio<span>→</span></a>
     </div>
     <div class="hero-foot">
       <span class="hero-dek">Time. Place. Subject. Where you are. &mdash; Phuket, Thailand</span>
@@ -378,58 +305,48 @@ footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:va
   </div>
 </section>
 
-<!-- TICKER -->
 <div class="ticker">
   <div class="tick-track" id="ticker"></div>
 </div>
 
-<!-- ══ WORK ══ -->
 <section class="work" id="work">
   <div class="work-head" data-r>
     <span class="work-head-l">Selected work</span>
     <span class="work-head-r">2024 &mdash; 2026</span>
   </div>
-
-  <!-- full-width spread -->
   <div class="wg wg-wide" data-r>
-    <div class="pf ar-21-7 ph t2">
-      <span class="pf-n">01</span>
-      <div class="pf-cap"><span class="v">Loch Palm Golf Club</span><span class="d">Mar 2026</span></div>
-    </div>
+    <div class="pf r-3-2"><div class="ph-inner"></div><span class="pf-n">01</span><div class="pf-cap"><span class="v">Loch Palm Golf Club</span><span class="d">Mar 2026</span></div></div>
   </div>
-
-  <!-- 5-col strip -->
   <div class="wg wg-5" data-r>
-    <div class="pf ar-1-1 ph t3"><span class="pf-n">02</span><div class="pf-cap"><span class="v">Blue Canyon CC</span><span class="d">Feb 2026</span></div></div>
-    <div class="pf ar-1-1 ph t4"><span class="pf-n">03</span><div class="pf-cap"><span class="v">Trisara</span><span class="d">Jan 2026</span></div></div>
-    <div class="pf ar-1-1 ph t5"><span class="pf-n">04</span><div class="pf-cap"><span class="v">The Sarojin</span><span class="d">Dec 2025</span></div></div>
-    <div class="pf ar-1-1 ph t1"><span class="pf-n">05</span><div class="pf-cap"><span class="v">Rosewood Phuket</span><span class="d">Nov 2025</span></div></div>
-    <div class="pf ar-1-1 ph t2"><span class="pf-n">06</span><div class="pf-cap"><span class="v">Amanpuri</span><span class="d">Oct 2025</span></div></div>
+    <div class="pf r-1-1"><div class="ph-inner" style="background:#161310;"></div><span class="pf-n">02</span><div class="pf-cap"><span class="v">Blue Canyon CC</span><span class="d">Feb 2026</span></div></div>
+    <div class="pf r-1-1"><div class="ph-inner" style="background:#111;"></div><span class="pf-n">03</span><div class="pf-cap"><span class="v">Trisara</span><span class="d">Jan 2026</span></div></div>
+    <div class="pf r-1-1"><div class="ph-inner" style="background:#0d0d0d;"></div><span class="pf-n">04</span><div class="pf-cap"><span class="v">The Sarojin</span><span class="d">Dec 2025</span></div></div>
+    <div class="pf r-1-1"><div class="ph-inner" style="background:#161310;"></div><span class="pf-n">05</span><div class="pf-cap"><span class="v">Rosewood Phuket</span><span class="d">Nov 2025</span></div></div>
+    <div class="pf r-1-1"><div class="ph-inner" style="background:#111;"></div><span class="pf-n">06</span><div class="pf-cap"><span class="v">Amanpuri</span><span class="d">Oct 2025</span></div></div>
   </div>
-
-  <!-- asymmetric: tall + wide -->
   <div class="wg wg-asym" data-r>
-    <div class="pf ar-3-4 ph t4"><span class="pf-n">07</span><div class="pf-cap"><span class="v">Sri Panwa</span><span class="d">Sep 2025</span></div></div>
-    <div class="pf ar-16-9 ph t1"><span class="pf-n">08</span><div class="pf-cap"><span class="v">Keemala</span><span class="d">Aug 2025</span></div></div>
+    <div class="pf r-2-3"><div class="ph-inner" style="background:#0d0d0d;"></div><span class="pf-n">07</span><div class="pf-cap"><span class="v">Sri Panwa</span><span class="d">Sep 2025</span></div></div>
+    <div class="pf r-5-4"><div class="ph-inner" style="background:#161310;"></div><span class="pf-n">08</span><div class="pf-cap"><span class="v">Keemala</span><span class="d">Aug 2025</span></div></div>
   </div>
-
-  <!-- 3-col close-out -->
   <div class="wg wg-3" data-r>
-    <div class="pf ar-4-3 ph t2"><span class="pf-n">09</span><div class="pf-cap"><span class="v">Anantara Mai Khao</span><span class="d">Jul 2025</span></div></div>
-    <div class="pf ar-4-3 ph t5"><span class="pf-n">10</span><div class="pf-cap"><span class="v">Intercontinental</span><span class="d">Jun 2025</span></div></div>
-    <div class="pf ar-4-3 ph t3"><span class="pf-n">11</span><div class="pf-cap"><span class="v">Conrad Koh Samui</span><span class="d">May 2025</span></div></div>
+    <div class="pf r-4-5"><div class="ph-inner" style="background:#111;"></div><span class="pf-n">09</span><div class="pf-cap"><span class="v">Anantara Mai Khao</span><span class="d">Jul 2025</span></div></div>
+    <div class="pf r-4-5"><div class="ph-inner" style="background:#0d0d0d;"></div><span class="pf-n">10</span><div class="pf-cap"><span class="v">Intercontinental</span><span class="d">Jun 2025</span></div></div>
+    <div class="pf r-4-5"><div class="ph-inner" style="background:#161310;"></div><span class="pf-n">11</span><div class="pf-cap"><span class="v">Conrad Koh Samui</span><span class="d">May 2025</span></div></div>
   </div>
-
+  <div class="work-foot">
+    <span>Country clubs &middot; villas &middot; hotel estates &middot; Phuket &middot; Koh Samui &middot; Europe</span>
+    <span class="r">@tachpasit</span>
+  </div>
 </section>
 
-<!-- ══ ABOUT — combined photographer + philosophy ══ -->
 <section class="about" id="studio">
-  <div class="about-img ph t2">
-    <span class="abb">Phuket · Thailand · Est. 2016</span>
+  <div class="about-img">
+    <div class="ph-dark"></div>
+    <span class="tag">Phuket · Thailand · Est. 2016</span>
   </div>
   <div class="about-txt" data-r>
     <div>
-      <span class="abt-eyebrow">Phuket, Thailand &mdash; Est. 2016</span>
+      <span class="abt-eyebrow">Tachpasit &mdash; Documentary Wedding Photography</span>
       <h2 class="abt-hl">About <span class="r">me.</span></h2>
       <div class="abt-body">
         <p>Photography is about four things: time, place, subject, and where you happen to be standing. Get those right — or wrong in the right way — and the picture exists. Everything else is secondary.</p>
@@ -447,30 +364,32 @@ footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:va
   </div>
 </section>
 
-<!-- ══ CONTACT ══ -->
-<section class="contact" id="contact">
-  <div data-r>
-    <h2 class="ct-hl">WRITE TO</h2>
-    <a href="mailto:hello@tachpasit.com" class="ct-email">TACHPASIT.</a>
-    <p class="ct-meta">
-      <a href="mailto:hello@tachpasit.com">hello@tachpasit.com</a>
-      &nbsp;&middot;&nbsp;
-      <a href="tel:+66000000000">+66 00 000 0000</a>
-      &nbsp;&middot;&nbsp;
-      <a href="https://instagram.com/tachpasit" target="_blank" rel="noopener">@tachpasit</a>
-    </p>
+<section class="process" id="process">
+  <div class="process-head" data-r>
+    <h2 class="process-hl">HOW IT <span class="r">WORKS</span></h2>
+    <span style="font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);">Four stages &mdash; every time</span>
   </div>
-  <div class="ct-grid" data-r>
-    <div>
-      <span class="ct-info-label">Based in Phuket</span>
-      <p class="ct-info-body">
-        Available across Thailand and in Europe.<br>
-        Happy to talk through any kind of wedding —<br>
-        big, small, destination, elopement.<br><br>
-        Usually replies within 48 hours.
+  <div class="process-steps" data-r>
+    <div class="ps"><div class="ps-n">01</div><div class="ps-h">Enquiry</div><p>A conversation about the date, venue, and shape of the day. No forms, no packages.</p></div>
+    <div class="ps"><div class="ps-n">02</div><div class="ps-h">Pre-shoot</div><p>An optional session before the wedding. Mostly just for the two of you.</p></div>
+    <div class="ps"><div class="ps-n">03</div><div class="ps-h">The day</div><p>Coverage stays quiet — following the day as it unfolds. Nothing staged.</p></div>
+    <div class="ps"><div class="ps-n">04</div><div class="ps-h">Delivery</div><p>A full gallery, hand-edited. Delivered to a private client portal. Yours to keep.</p></div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-inner" data-r>
+    <div class="contact-left">
+      <h2 class="ct-hl">WRITE TO</h2>
+      <a href="mailto:hello@tachpasit.com" class="ct-email">TACHPASIT.</a>
+      <p class="ct-meta">
+        <a href="mailto:hello@tachpasit.com">hello@tachpasit.com</a> &nbsp;&middot;&nbsp;
+        <a href="tel:+66000000000">+66 00 000 0000</a> &nbsp;&middot;&nbsp;
+        <a href="https://instagram.com/tachpasit" target="_blank" rel="noopener">@tachpasit</a>
       </p>
     </div>
-    <div>
+    <div class="ct-divider"></div>
+    <div class="contact-right">
       <form class="eq" id="eq">
         <div class="two">
           <div class="fl"><label>Names</label><input type="text" placeholder="Both names" required></div>
@@ -492,13 +411,12 @@ footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:va
   <p>&copy; <span id="yr"></span> Tachpasit. All rights reserved.</p>
   <div class="foot-r">
     <a href="https://instagram.com/tachpasit" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://wa.me/66924655359" target="_blank" rel="noopener" style="color:var(--red);">WhatsApp</a>
-    <a href="#top">Top &uarr;</a>
+    <a href="https://wa.me/66924655359" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="#top">Top ↑</a>
   </div>
 </footer>
 
 <script>
-/* ticker */
 const words=['Documentary','Phuket','No poses','Koh Samui','Europe','Are-Bure-Boke','Unscripted','Since 2016','@tachpasit','Hand-edited'];
 const t=document.getElementById('ticker');
 [...words,...words,...words,...words].forEach((w,i)=>{
@@ -509,19 +427,16 @@ const t=document.getElementById('ticker');
 });
 t.parentNode.appendChild(t.cloneNode(true));
 
-/* reveal */
 const ro=new IntersectionObserver(e=>{
   e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');ro.unobserve(x.target);}});
 },{threshold:.07});
 document.querySelectorAll('[data-r]').forEach(el=>ro.observe(el));
 
-/* form */
 document.getElementById('eq').addEventListener('submit',e=>{
   e.preventDefault();
   document.getElementById('ok').classList.add('show');
   e.target.reset();
 });
-
 document.getElementById('yr').textContent=new Date().getFullYear();
 </script>
 </body>
