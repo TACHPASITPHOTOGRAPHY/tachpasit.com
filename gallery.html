@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TACHPASIT — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0C0A08;
+  --paper:#EDE8DF;
+  --red:#C80000;
+  --mute:#5A5248;
+  --rule:#1E1C19;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--void);
+  color:var(--paper);
+  font-family:'Space Mono',monospace;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;width:100%;height:100%;object-fit:cover;}
+::selection{background:var(--red);color:var(--paper);}
+
+/* grain */
+body::after{
+  content:"";position:fixed;inset:0;
+  pointer-events:none;z-index:999;
+  opacity:.065;mix-blend-mode:screen;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:300;
+  background:var(--void);
+  border-bottom:1px solid var(--rule);
+  padding:14px 5vw;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+}
+.nav-back{
+  font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--mute);transition:color .2s;
+  display:flex;align-items:center;gap:6px;
+}
+.nav-back::before{content:"←";font-size:.6rem;}
+.nav-back:hover{color:var(--paper);}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.1rem;letter-spacing:.28em;color:var(--paper);
+  opacity:.8;text-align:center;transition:opacity .2s;
+}
+.nav-logo:hover{opacity:1;}
+.nav-right{display:flex;align-items:center;gap:18px;justify-content:flex-end;}
+.nav-right a{
+  font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--mute);transition:color .2s;
+}
+.nav-right a:hover{color:var(--paper);}
+.nav-right a.wa{color:var(--red);}
+.nav-right a.wa:hover{color:var(--paper);}
+
+/* ── PAGE HEADER ── */
+.page-head{
+  padding:48px 5vw 36px;
+  border-bottom:1px solid var(--rule);
+  display:flex;justify-content:space-between;align-items:flex-end;
+  flex-wrap:wrap;gap:12px;
+}
+.page-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2rem,5vw,3.6rem);
+  line-height:.9;color:var(--paper);letter-spacing:.02em;
+}
+.page-count{
+  font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);
+}
+
+/* ── PORTFOLIO GRID ── */
+.portfolio-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  background:var(--rule);
+  padding:2px;
+}
+
+/* ── PORTFOLIO CARD ── */
+.pcard{
+  position:relative;overflow:hidden;
+  background:#181512;
+  cursor:pointer;
+  display:block;
+  text-decoration:none;
+}
+.pcard-img{
+  position:relative;
+  aspect-ratio:3/2;
+  overflow:hidden;
+}
+.pcard-img img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  filter:contrast(1.15) grayscale(1);
+  transition:transform .7s var(--ease), filter .4s;
+  opacity:0;
+}
+.pcard-img img.loaded{opacity:1;}
+.pcard:hover .pcard-img img{
+  transform:scale(1.05);
+  filter:contrast(1.05) grayscale(.6);
+}
+
+/* dark overlay on hover */
+.pcard-img::after{
+  content:"";
+  position:absolute;inset:0;
+  background:rgba(12,10,8,0);
+  transition:background .4s;
+  z-index:1;
+}
+.pcard:hover .pcard-img::after{
+  background:rgba(12,10,8,.32);
+}
+
+/* view label appears on hover */
+.pcard-view{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(.92);
+  z-index:2;
+  background:transparent;
+  border:1px solid rgba(237,232,223,.7);
+  color:var(--paper);
+  font-family:'Space Mono',monospace;
+  font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;
+  padding:9px 18px;
+  opacity:0;
+  transition:opacity .3s, transform .3s var(--ease);
+  white-space:nowrap;
+}
+.pcard:hover .pcard-view{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
+}
+
+/* red corner number */
+.pcard-num{
+  position:absolute;top:10px;left:10px;z-index:3;
+  font-size:.46rem;letter-spacing:.1em;
+  color:rgba(237,232,223,.25);
+  font-family:'Space Mono',monospace;
+}
+
+/* ── CARD INFO ── */
+.pcard-info{
+  padding:14px 16px 16px;
+  border-top:1px solid var(--rule);
+  display:flex;justify-content:space-between;align-items:flex-end;
+}
+.pcard-venue{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.05rem;letter-spacing:.04em;color:var(--paper);
+  line-height:1;display:block;margin-bottom:4px;
+}
+.pcard-meta{
+  font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);
+}
+.pcard-arrow{
+  font-size:.9rem;color:var(--rule);
+  transition:color .2s, transform .3s var(--ease);
+  flex-shrink:0;margin-left:12px;
+}
+.pcard:hover .pcard-arrow{color:var(--red);transform:translateX(4px);}
+
+/* featured card — first one, larger */
+.pcard.featured{grid-column:span 2;}
+.pcard.featured .pcard-img{aspect-ratio:16/7;}
+
+/* ── FOOTER ── */
+footer{
+  padding:14px 5vw;border-top:1px solid var(--rule);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:10px;margin-top:2px;
+}
+footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rule);}
+.foot-r{display:flex;gap:0;}
+.foot-r a{
+  font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--rule);padding:0 14px;border-left:1px solid var(--rule);
+  transition:color .2s;
+}
+.foot-r a:hover{color:var(--paper);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:800px){
+  .portfolio-grid{grid-template-columns:repeat(2,1fr);}
+  .pcard.featured{grid-column:span 2;}
+}
+@media(max-width:500px){
+  .portfolio-grid{grid-template-columns:1fr;}
+  .pcard.featured{grid-column:span 1;}
+  .pcard.featured .pcard-img{aspect-ratio:3/2;}
+  .nav-right{display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">Back</a>
+  <a href="index.html" class="nav-logo">TACHPASIT</a>
+  <div class="nav-right">
+    <a href="https://instagram.com/tachpasit" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://wa.me/66924655359" target="_blank" rel="noopener" class="wa">WhatsApp</a>
+  </div>
+</nav>
+
+<div class="page-head">
+  <h1 class="page-title">Selected<br>Portfolio</h1>
+  <span class="page-count" id="totalCount"></span>
+</div>
+
+<div class="portfolio-grid" id="portfolioGrid"></div>
+
+<footer>
+  <p>&copy; <span id="yr"></span> Tachpasit. All rights reserved.</p>
+  <div class="foot-r">
+    <a href="https://instagram.com/tachpasit" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://wa.me/66924655359" target="_blank" rel="noopener" style="color:var(--red)">WhatsApp</a>
+    <a href="#" onclick="window.scrollTo(0,0);return false;">Top ↑</a>
+  </div>
+</footer>
+
+<script>
+/* ─────────────────────────────────────────────────────
+   PORTFOLIOS — add each wedding here.
+   cover: path to the cover image
+   venue: venue name
+   date:  displayed date string
+   loc:   location
+   href:  link to the individual portfolio page
+   count: number of photos
+   ───────────────────────────────────────────────────── */
+const portfolios = [
+  {
+    cover:'https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?w=1600&h=700&fit=crop&q=80',
+    venue:'Loch Palm Golf Club',
+    date:'March 2026',loc:'Phuket, Thailand',
+    href:'portfolio-detail.html',count:24,featured:true
+  },
+  {
+    cover:'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=900&h=600&fit=crop&q=80',
+    venue:'Trisara',
+    date:'January 2026',loc:'Phuket, Thailand',
+    href:'portfolio-detail.html',count:28
+  },
+  {
+    cover:'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=900&h=600&fit=crop&q=80',
+    venue:'Blue Canyon CC',
+    date:'February 2026',loc:'Phuket, Thailand',
+    href:'portfolio-detail.html',count:22
+  },
+  {
+    cover:'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=900&h=600&fit=crop&q=80',
+    venue:'The Sarojin',
+    date:'December 2025',loc:'Khao Lak, Thailand',
+    href:'portfolio-detail.html',count:30
+  },
+  {
+    cover:'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=900&h=600&fit=crop&q=80',
+    venue:'Rosewood Phuket',
+    date:'November 2025',loc:'Phuket, Thailand',
+    href:'portfolio-detail.html',count:26
+  },
+  {
+    cover:'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=900&h=600&fit=crop&q=80',
+    venue:'Amanpuri',
+    date:'October 2025',loc:'Phuket, Thailand',
+    href:'portfolio-detail.html',count:20
+  },
+  {
+    cover:'https://images.unsplash.com/photo-1478145787956-f5f34b8d8b22?w=900&h=600&fit=crop&q=80',
+    venue:'Sri Panwa',
+    date:'September 2025',loc:'Phuket, Thailand',
+    href:'portfolio-detail.html',count:24
+  },
+  {
+    cover:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&h=600&fit=crop&q=80',
+    venue:'Keemala',
+    date:'August 2025',loc:'Phuket, Thailand',
+    href:'portfolio-detail.html',count:22
+  },
+];
+
+const grid = document.getElementById('portfolioGrid');
+
+portfolios.forEach((p, i) => {
+  const card = document.createElement('a');
+  card.href = p.href;
+  card.className = 'pcard' + (p.featured ? ' featured' : '');
+  card.innerHTML = `
+    <div class="pcard-img">
+      <img data-src="${p.cover}" alt="${p.venue}">
+      <span class="pcard-num">${String(i+1).padStart(2,'0')}</span>
+      <div class="pcard-view">View portfolio</div>
+    </div>
+    <div class="pcard-info">
+      <div>
+        <span class="pcard-venue">${p.venue}</span>
+        <span class="pcard-meta">${p.date} &nbsp;·&nbsp; ${p.loc} &nbsp;·&nbsp; ${p.count} photos</span>
+      </div>
+      <span class="pcard-arrow">→</span>
+    </div>`;
+  grid.appendChild(card);
+});
+
+document.getElementById('totalCount').textContent = portfolios.length + ' weddings';
+
+/* lazy load */
+const obs = new IntersectionObserver((entries, o) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const img = e.target;
+    img.src = img.dataset.src;
+    img.onload = () => img.classList.add('loaded');
+    o.unobserve(img);
+  });
+}, { rootMargin:'200px' });
+
+document.querySelectorAll('img[data-src]').forEach(img => obs.observe(img));
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

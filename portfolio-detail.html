@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TACHPASIT — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0C0A08;
+  --paper:#EDE8DF;
+  --red:#C80000;
+  --mute:#5A5248;
+  --rule:#1E1C19;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--void);
+  color:var(--paper);
+  font-family:'Space Mono',monospace;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;width:100%;height:100%;object-fit:cover;}
+::selection{background:var(--red);color:var(--paper);}
+
+/* grain */
+body::after{
+  content:"";position:fixed;inset:0;
+  pointer-events:none;z-index:999;
+  opacity:.065;mix-blend-mode:screen;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:300;
+  background:var(--void);
+  border-bottom:1px solid var(--rule);
+  padding:14px 5vw;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+}
+.nav-back{
+  font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--mute);transition:color .2s;
+  display:flex;align-items:center;gap:6px;
+}
+.nav-back:hover{color:var(--paper);}
+.nav-back::before{content:"←";font-size:.6rem;}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.1rem;letter-spacing:.28em;color:var(--paper);
+  opacity:.8;text-align:center;transition:opacity .2s;
+}
+.nav-logo:hover{opacity:1;}
+.nav-right{
+  display:flex;align-items:center;gap:18px;justify-content:flex-end;
+}
+.nav-right a{
+  font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--mute);transition:color .2s;
+}
+.nav-right a:hover{color:var(--paper);}
+.nav-right a.wa{color:var(--red);}
+.nav-right a.wa:hover{color:var(--paper);}
+
+/* ── HEADER ── */
+.portfolio-head{
+  padding:40px 5vw 32px;
+  border-bottom:1px solid var(--rule);
+  display:flex;justify-content:space-between;align-items:flex-end;
+  flex-wrap:wrap;gap:16px;
+}
+.head-left{}
+.portfolio-venue{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.2rem,5vw,4rem);
+  line-height:.88;color:var(--paper);
+  letter-spacing:.01em;
+}
+.portfolio-meta{
+  margin-top:10px;
+  font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);line-height:1.9;
+}
+.portfolio-meta span{color:var(--red);}
+.head-right{
+  display:flex;align-items:center;gap:16px;
+}
+.photo-count{
+  font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);
+}
+.btn-download{
+  font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--red);border:1px solid var(--red);
+  padding:8px 16px;transition:background .2s,color .2s;
+  white-space:nowrap;
+}
+.btn-download:hover{background:var(--red);color:var(--paper);}
+
+/* ── EDITORIAL GRID ── */
+.editorial{
+  padding:2px;
+  display:flex;flex-direction:column;
+  gap:2px;
+}
+
+/* block types */
+.block-full{width:100%;}
+.block-pair{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.block-single{
+  display:flex;justify-content:center;
+}
+.block-single .pf{width:52%;}
+.block-trio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;}
+
+/* off-center variants for rhythm */
+.block-pair.heavy-left{grid-template-columns:1.4fr 1fr;}
+.block-pair.heavy-right{grid-template-columns:1fr 1.4fr;}
+.block-single.left{justify-content:flex-start;}
+.block-single.left .pf{width:58%;margin-left:0;}
+.block-single.right{justify-content:flex-end;}
+.block-single.right .pf{width:58%;margin-right:0;}
+
+/* photo frame */
+.pf{
+  position:relative;overflow:hidden;
+  background:#181512;
+  background-image:repeating-linear-gradient(
+    0deg,transparent,transparent 2px,
+    rgba(255,255,255,.004) 2px,rgba(255,255,255,.004) 3px
+  );
+  cursor:pointer;
+  width:100%;
+}
+.pf img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;
+  transition:transform .6s var(--ease), opacity .4s ease;
+  filter:contrast(1.18) grayscale(1);
+  opacity:0;
+}
+.pf img.loaded{ opacity:1; }
+.pf:hover img{transform:scale(1.03);}
+
+/* ── Photo aspect ratios — always preserved ── */
+.r-4-5{ aspect-ratio:4/5; }
+.r-5-4{ aspect-ratio:5/4; }
+.r-3-2{ aspect-ratio:3/2; }
+.r-2-3{ aspect-ratio:2/3; }
+.r-1-1{ aspect-ratio:1/1; }
+
+/* ── Block rules — no fixed heights, photos breathe freely ── */
+.block-full  .pf { width:100%; }
+.block-pair      { align-items:start; }
+.block-trio      { align-items:start; }
+
+/* placeholder label */
+.pf-ph{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:6px;
+}
+.pf-ph .n{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.4rem;color:#1E1C19;letter-spacing:.06em;
+}
+.pf-ph .hint{
+  font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;
+  color:#1E1C19;
+}
+
+/* lightbox */
+.lb{
+  display:none;position:fixed;inset:0;z-index:800;
+  background:rgba(12,10,8,.96);
+  align-items:center;justify-content:center;
+  flex-direction:column;
+}
+.lb.open{display:flex;}
+.lb-img{
+  max-width:90vw;max-height:85vh;
+  object-fit:contain;display:block;
+}
+.lb-close{
+  position:absolute;top:20px;right:5vw;
+  background:none;border:none;
+  font-family:'Space Mono',monospace;
+  font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);cursor:pointer;
+  transition:color .2s;
+}
+.lb-close:hover{color:var(--paper);}
+.lb-nav{
+  display:flex;gap:32px;align-items:center;margin-top:16px;
+}
+.lb-nav button{
+  background:none;border:none;
+  font-family:'Space Mono',monospace;
+  font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);cursor:pointer;transition:color .2s;
+}
+.lb-nav button:hover{color:var(--paper);}
+.lb-count{font-size:.46rem;letter-spacing:.12em;color:var(--mute);}
+
+/* ── FOOTER ── */
+footer{
+  padding:14px 5vw;
+  border-top:1px solid var(--rule);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:10px;margin-top:2px;
+}
+footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rule);}
+.foot-r{display:flex;gap:0;}
+.foot-r a{
+  font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--rule);padding:0 14px;border-left:1px solid var(--rule);
+  transition:color .2s;
+}
+.foot-r a:hover{color:var(--paper);}
+
+/* responsive */
+@media(max-width:700px){
+  .block-trio{grid-template-columns:1fr 1fr;}
+  .block-single .pf,.block-single.left .pf,.block-single.right .pf{width:80%;margin:0 auto;}
+  .block-pair.heavy-left,.block-pair.heavy-right{grid-template-columns:1fr 1fr;}
+  nav{padding:12px 5vw;}
+  .portfolio-head{padding:28px 5vw 22px;}
+}
+@media(max-width:480px){
+  .block-pair{grid-template-columns:1fr;}
+  .block-trio{grid-template-columns:1fr;}
+  .block-single .pf{width:100%;}
+  .nav-right{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">Back</a>
+  <a href="index.html" class="nav-logo">TACHPASIT</a>
+  <div class="nav-right">
+    <a href="https://instagram.com/tachpasit" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://wa.me/66924655359" target="_blank" rel="noopener" class="wa">WhatsApp</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<div class="portfolio-head">
+  <div class="head-left">
+    <h1 class="portfolio-venue">Loch Palm<br>Golf Club</h1>
+    <p class="portfolio-meta">
+      March 2026 &nbsp;<span>·</span>&nbsp; Phuket, Thailand
+    </p>
+  </div>
+  <div class="head-right">
+    <span class="photo-count" id="photoCount">24 photographs</span>
+    <a href="#" class="btn-download">Download all</a>
+  </div>
+</div>
+
+<!-- EDITORIAL SEQUENCE -->
+<div class="editorial" id="editorial"></div>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <button class="lb-close" id="lbClose">Close ×</button>
+  <img class="lb-img" id="lbImg" src="" alt="">
+  <div class="lb-nav">
+    <button id="lbPrev">← Prev</button>
+    <span class="lb-count" id="lbCount">1 / 24</span>
+    <button id="lbNext">Next →</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; <span id="yr"></span> Tachpasit. All rights reserved.</p>
+  <div class="foot-r">
+    <a href="https://instagram.com/tachpasit" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://wa.me/66924655359" target="_blank" rel="noopener" style="color:var(--red)">WhatsApp</a>
+    <a href="#" onclick="window.scrollTo(0,0);return false;">Top ↑</a>
+  </div>
+</footer>
+
+<script>
+/* ─────────────────────────────────────────────
+   PHOTOS — edit this array to add real images.
+   src: path to your image file (e.g. 'photos/01.jpg')
+   r: ratio — '4:5' | '5:4' | '3:2' | '2:3' | '1:1'
+   ───────────────────────────────────────────── */
+const photos = [
+  {src:'https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?w=1500&h=1200&fit=crop&q=80', r:'5:4'},
+  {src:'https://images.unsplash.com/photo-1509731987499-fd9bba3a46cc?w=800&h=1000&fit=crop&q=80',  r:'4:5'},
+  {src:'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1200&h=800&fit=crop&q=80',  r:'3:2'},
+  {src:'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&h=1200&fit=crop&q=80',  r:'2:3'},
+  {src:'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1000&h=1000&fit=crop&q=80', r:'1:1'},
+  {src:'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1200&h=800&fit=crop&q=80',  r:'3:2'},
+  {src:'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&h=1000&fit=crop&q=80',  r:'4:5'},
+  {src:'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1000&h=800&fit=crop&q=80',  r:'5:4'},
+  {src:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=1200&fit=crop&q=80',  r:'2:3'},
+  {src:'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&h=800&fit=crop&q=80',  r:'3:2'},
+  {src:'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1000&h=1000&fit=crop&q=80', r:'1:1'},
+  {src:'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&h=1000&fit=crop&q=80',  r:'4:5'},
+  {src:'https://images.unsplash.com/photo-1478145787956-f5f34b8d8b22?w=1200&h=800&fit=crop&q=80',  r:'3:2'},
+  {src:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1200&fit=crop&q=80',  r:'2:3'},
+  {src:'https://images.unsplash.com/photo-1524863479829-916d8e77f114?w=1000&h=800&fit=crop&q=80',  r:'5:4'},
+  {src:'https://images.unsplash.com/photo-1542206395-9eb3e21de68f?w=1000&h=1000&fit=crop&q=80',    r:'1:1'},
+  {src:'https://images.unsplash.com/photo-1525186402429-b4ff38bedec6?w=800&h=1000&fit=crop&q=80',  r:'4:5'},
+  {src:'https://images.unsplash.com/photo-1487530811015-780780018cd8?w=1200&h=800&fit=crop&q=80',  r:'3:2'},
+  {src:'https://images.unsplash.com/photo-1521656693074-0ef32e80a5d5?w=800&h=1200&fit=crop&q=80',  r:'2:3'},
+  {src:'https://images.unsplash.com/photo-1526318896980-cf78c088247c?w=1000&h=800&fit=crop&q=80',  r:'5:4'},
+  {src:'https://images.unsplash.com/photo-1500336624523-d727130c3328?w=1000&h=1000&fit=crop&q=80', r:'1:1'},
+  {src:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&h=1000&fit=crop&q=80',  r:'4:5'},
+  {src:'https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=1200&h=800&fit=crop&q=80',  r:'3:2'},
+  {src:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=1200&fit=crop&q=80',    r:'2:3'},
+];
+
+/* ratio → CSS class */
+const ratioClass = {
+  '4:5':'r-4-5','5:4':'r-5-4',
+  '3:2':'r-3-2','2:3':'r-2-3','1:1':'r-1-1'
+};
+
+/* editorial sequence pattern — repeats */
+const pattern = [
+  {type:'full'},
+  {type:'pair'},
+  {type:'single'},
+  {type:'trio'},
+];
+
+/* background tones for placeholders */
+const tones = ['#1C1916','#181512','#141210','#110F0D','#0F0D0B','#1A1714'];
+
+function makePf(idx, extraClass = '') {
+  const p = photos[idx];
+  const rc = ratioClass[p.r] || 'r-3-2';
+  const tone = tones[idx % tones.length];
+  return `
+    <div class="pf ${rc} ${extraClass}" data-idx="${idx}" style="background:${tone}">
+      ${p.src
+        ? `<img data-src="${p.src}" alt="Photo ${idx+1}">`
+        : `<div class="pf-ph"><span class="n">${String(idx+1).padStart(2,'0')}</span><span class="hint">Replace with photo</span></div>`
+      }
+    </div>`;
+}
+
+function buildGrid() {
+  const el = document.getElementById('editorial');
+  let i = 0;
+  let patIdx = 0;
+
+  while (i < photos.length) {
+    const block = pattern[patIdx % pattern.length];
+    patIdx++;
+
+    if (block.type === 'full' && i < photos.length) {
+      const p = photos[i];
+      const rc = ratioClass[p.r] || 'r-3-2';
+      const tone = tones[i % tones.length];
+      el.innerHTML += `
+        <div class="block-full">
+          <div class="pf ${rc}" data-idx="${i}" style="background:${tone}">
+            ${p.src
+              ? `<img data-src="${p.src}" alt="Photo ${i+1}">`
+              : `<div class="pf-ph"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="hint">Replace with photo</span></div>`
+            }
+          </div>
+        </div>`;
+      i++;
+    } else if (block.type === 'pair' && i+1 < photos.length) {
+      const variants = ['','heavy-left','heavy-right'];
+      const v = variants[Math.floor(patIdx/2) % variants.length];
+      el.innerHTML += `<div class="block-pair ${v}">${makePf(i)}${makePf(i+1)}</div>`;
+      i += 2;
+    } else if (block.type === 'single' && i < photos.length) {
+      const pos = patIdx % 3 === 0 ? 'left' : patIdx % 3 === 1 ? '' : 'right';
+      const p = photos[i];
+      const rc = ratioClass[p.r] || 'r-2-3';
+      const tone = tones[i % tones.length];
+      // single: width based on portrait vs landscape
+      const isPortrait = p.r === '4:5' || p.r === '2:3';
+      const w = isPortrait ? '42%' : '60%';
+      el.innerHTML += `
+        <div class="block-single ${pos}">
+          <div class="pf ${rc}" data-idx="${i}" style="background:${tone};width:${w}">
+            ${p.src
+              ? `<img data-src="${p.src}" alt="Photo ${i+1}">`
+              : `<div class="pf-ph"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="hint">Replace with photo</span></div>`
+            }
+          </div>
+        </div>`;
+      i++;
+    } else if (block.type === 'trio' && i+2 < photos.length) {
+      el.innerHTML += `<div class="block-trio">${makePf(i)}${makePf(i+1)}${makePf(i+2)}</div>`;
+      i += 3;
+    } else {
+      if (i+1 < photos.length) {
+        el.innerHTML += `<div class="block-pair">${makePf(i)}${makePf(i+1)}</div>`;
+        i += 2;
+      } else {
+        const p = photos[i];
+        const rc = ratioClass[p.r] || 'r-3-2';
+        const tone = tones[i % tones.length];
+        el.innerHTML += `
+          <div class="block-single">
+            <div class="pf ${rc}" data-idx="${i}" style="background:${tone};width:60%">
+              ${p.src
+                ? `<img data-src="${p.src}" alt="Photo ${i+1}">`
+                : `<div class="pf-ph"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="hint">Replace with photo</span></div>`
+              }
+            </div>
+          </div>`;
+        i++;
+      }
+    }
+  }
+
+  document.getElementById('photoCount').textContent = photos.length + ' photographs';
+}
+
+buildGrid();
+
+/* lightbox */
+let current = 0;
+const lb = document.getElementById('lb');
+const lbImg = document.getElementById('lbImg');
+const lbCount = document.getElementById('lbCount');
+
+document.getElementById('editorial').addEventListener('click', e => {
+  const pf = e.target.closest('.pf[data-idx]');
+  if (!pf) return;
+  const idx = parseInt(pf.dataset.idx);
+  const src = photos[idx].src;
+  if (!src) return; // no image yet — skip lightbox
+  current = idx;
+  openLb();
+});
+
+function openLb() {
+  const src = photos[current].src;
+  if (!src) return;
+  lbImg.src = src;
+  lbCount.textContent = (current + 1) + ' / ' + photos.length;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+document.getElementById('lbClose').addEventListener('click', closeLb);
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.getElementById('lbPrev').addEventListener('click', () => { current = (current - 1 + photos.length) % photos.length; openLb(); });
+document.getElementById('lbNext').addEventListener('click', () => { current = (current + 1) % photos.length; openLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') { current = (current - 1 + photos.length) % photos.length; openLb(); }
+  if (e.key === 'ArrowRight') { current = (current + 1) % photos.length; openLb(); }
+});
+function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* lazy load — images fade in as they enter viewport */
+const lazyObs = new IntersectionObserver((entries, obs) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const img = e.target;
+    img.src = img.dataset.src;
+    img.onload = () => img.classList.add('loaded');
+    img.onerror = () => img.classList.add('loaded');
+    obs.unobserve(img);
+  });
+}, { rootMargin: '200px' });
+
+document.querySelectorAll('img[data-src]').forEach(img => lazyObs.observe(img));
+</script>
+</body>
+</html>
