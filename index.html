@@ -390,7 +390,7 @@ footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:va
     </div>
     <div class="ct-divider"></div>
     <div class="contact-right">
-      <form class="eq" id="eq">
+      <form class="eq" id="eq" action="https://formspree.io/f/xwlkllan" method="POST">
         <div class="two">
           <div class="fl"><label>Names</label><input type="text" placeholder="Both names" required></div>
           <div class="fl"><label>Date</label><input type="date"></div>
@@ -432,7 +432,7 @@ const ro=new IntersectionObserver(e=>{
 },{threshold:.07});
 document.querySelectorAll('[data-r]').forEach(el=>ro.observe(el));
 
-document.getElementById('eq').addEventListener('submit',e=>{
+document.getElementById('eq').addEventListener('submit',async e=>{
   e.preventDefault();
   document.getElementById('ok').classList.add('show');
   e.target.reset();
