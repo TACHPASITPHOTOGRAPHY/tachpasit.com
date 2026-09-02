@@ -374,6 +374,8 @@ footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:va
     <div class="ct-divider"></div>
     <div class="contact-right">
       <form class="eq" id="eq" action="https://formspree.io/f/xwlkllan" method="POST">
+        <input type="hidden" name="_next" value="https://tachpasit.com">
+        <input type="hidden" name="_subject" value="New enquiry from tachpasit.com">
         <div class="two">
           <div class="fl"><label>Names</label><input type="text" name="names" placeholder="Both names" required></div>
           <div class="fl"><label>Date</label><input type="date" name="wedding_date"></div>
@@ -407,26 +409,7 @@ const ro=new IntersectionObserver(e=>{
 },{threshold:.07});
 document.querySelectorAll('[data-r]').forEach(el=>ro.observe(el));
 
-document.getElementById('eq').addEventListener('submit', async e => {
-  e.preventDefault();
-  const form = e.target;
-  const data = new FormData(form);
-  try {
-    const res = await fetch('https://formspree.io/f/xwlkllan', {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    });
-    if (res.ok) {
-      document.getElementById('ok').classList.add('show');
-      form.reset();
-    } else {
-      alert('Something went wrong. Please email info@tachpasit.com directly.');
-    }
-  } catch(err) {
-    alert('Something went wrong. Please email info@tachpasit.com directly.');
-  }
-});
+// Form submits natively to Formspree
 document.getElementById('yr').textContent=new Date().getFullYear();
 </script>
 </body>
