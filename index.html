@@ -375,12 +375,12 @@ footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:va
     <div class="contact-right">
       <form class="eq" id="eq" action="https://formspree.io/f/xwlkllan" method="POST">
         <div class="two">
-          <div class="fl"><label>Names</label><input type="text" placeholder="Both names" required></div>
-          <div class="fl"><label>Date</label><input type="date"></div>
+          <div class="fl"><label>Names</label><input type="text" name="names" placeholder="Both names" required></div>
+          <div class="fl"><label>Date</label><input type="date" name="wedding_date"></div>
         </div>
-        <div class="fl"><label>Venue / location</label><input type="text" placeholder="e.g. Loch Palm Golf Club, Phuket"></div>
-        <div class="fl"><label>Email</label><input type="email" placeholder="your@email.com" required></div>
-        <div class="fl"><label>Tell me about your day</label><textarea rows="3" placeholder="Venue, vibe, anything"></textarea></div>
+        <div class="fl"><label>Venue / location</label><input type="text" name="venue" placeholder="e.g. Loch Palm Golf Club, Phuket"></div>
+        <div class="fl"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
+        <div class="fl"><label>Tell me about your day</label><textarea rows="3" name="message" placeholder="Venue, vibe, anything"></textarea></div>
         <div>
           <button type="submit" class="btn-send">Send &rarr;</button>
           <p class="form-ok" id="ok">Received &mdash; reply within 48 hours.</p>
