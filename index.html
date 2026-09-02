@@ -104,15 +104,7 @@ nav{
 }
 .hero-cta:hover{background:var(--paper);color:var(--void);}
 
-/* ── TICKER ── */
-.ticker{
-  background:var(--void);overflow:hidden;
-  border-bottom:1px solid var(--rule);padding:7px 0;
-}
-.tick-track{display:flex;white-space:nowrap;animation:tick 26s linear infinite;}
-.tick-track span{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rule);padding:0 3vw;}
-.tick-track span.r{color:var(--void);}
-@keyframes tick{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
 
 /* ── WORK ── */
 .work{background:var(--void);}
@@ -184,11 +176,11 @@ nav{
 .abt-body{font-size:.65rem;line-height:2.1;color:var(--mute);}
 .abt-body strong{color:var(--paper);}
 .abt-body p+p{margin-top:1.3em;}
-.abt-rule{width:32px;height:2px;background:var(--red);margin:28px 0;}
-.abt-stats{display:flex;gap:36px;padding-top:22px;border-top:1px solid var(--rule);flex-wrap:wrap;}
-.stat b{display:block;font-family:'Bebas Neue',sans-serif;font-size:2.6rem;color:var(--paper);line-height:.9;}
-.stat b .r{color:var(--red);}
-.stat span{font-size:.44rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);}
+
+
+
+
+
 
 /* ── PROCESS ── */
 .process{background:var(--void);padding:0;border-bottom:1px solid var(--rule);}
@@ -305,8 +297,6 @@ footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:va
   </div>
 </section>
 
-<div class="ticker">
-  <div class="tick-track" id="ticker"></div>
 </div>
 
 <section class="work" id="work">
@@ -354,14 +344,7 @@ footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:va
         <p>The job, mostly, is to stay humble, stay low, and not get in the way of what's already happening. <strong>A wedding doesn't need directing. It needs someone paying close enough attention to be there when it does.</strong></p>
         <p>Based in Phuket since 2016. Available across Thailand and in Europe.</p>
       </div>
-      <div class="abt-rule"></div>
-    </div>
-    <div class="abt-stats">
-      <div class="stat"><b>120<span class="r">+</span></b><span>Weddings</span></div>
-      <div class="stat"><b>12</b><span>Countries</span></div>
-      <div class="stat"><b>8</b><span>Years</span></div>
-    </div>
-  </div>
+      </div>
 </section>
 
 <section class="process" id="process">
@@ -417,25 +400,32 @@ footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:va
 </footer>
 
 <script>
-const words=['Documentary','Phuket','No poses','Koh Samui','Europe','Are-Bure-Boke','Unscripted','Since 2016','@tachpasit','Hand-edited'];
-const t=document.getElementById('ticker');
-[...words,...words,...words,...words].forEach((w,i)=>{
-  const s=document.createElement('span');
-  s.textContent=w.toUpperCase();
-  if(i%7===6)s.className='r';
-  t.appendChild(s);
-});
-t.parentNode.appendChild(t.cloneNode(true));
+
 
 const ro=new IntersectionObserver(e=>{
   e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');ro.unobserve(x.target);}});
 },{threshold:.07});
 document.querySelectorAll('[data-r]').forEach(el=>ro.observe(el));
 
-document.getElementById('eq').addEventListener('submit',async e=>{
+document.getElementById('eq').addEventListener('submit', async e => {
   e.preventDefault();
-  document.getElementById('ok').classList.add('show');
-  e.target.reset();
+  const form = e.target;
+  const data = new FormData(form);
+  try {
+    const res = await fetch('https://formspree.io/f/xwlkllan', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      document.getElementById('ok').classList.add('show');
+      form.reset();
+    } else {
+      alert('Something went wrong. Please email info@tachpasit.com directly.');
+    }
+  } catch(err) {
+    alert('Something went wrong. Please email info@tachpasit.com directly.');
+  }
 });
 document.getElementById('yr').textContent=new Date().getFullYear();
 </script>
