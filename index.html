@@ -373,8 +373,7 @@ footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:va
     </div>
     <div class="ct-divider"></div>
     <div class="contact-right">
-      <form class="eq" id="eq" action="https://formspree.io/f/xwlkllan" method="POST">
-        <input type="hidden" name="_next" value="https://tachpasit.com">
+      <form class="eq" id="eq">
         <input type="hidden" name="_subject" value="New enquiry from tachpasit.com">
         <div class="two">
           <div class="fl"><label>Names</label><input type="text" name="names" placeholder="Both names" required></div>
@@ -409,7 +408,42 @@ const ro=new IntersectionObserver(e=>{
 },{threshold:.07});
 document.querySelectorAll('[data-r]').forEach(el=>ro.observe(el));
 
-// Form submits natively to Formspree
+document.getElementById('eq').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('.btn-send');
+  btn.textContent = 'Sending...';
+  btn.style.opacity = '0.6';
+  try {
+    const res = await fetch('https://formspree.io/f/xwlkllan', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        names: form.names.value,
+        wedding_date: form.wedding_date.value,
+        venue: form.venue.value,
+        email: form.email.value,
+        message: form.message.value,
+        _subject: 'New enquiry from tachpasit.com'
+      })
+    });
+    if (res.ok) {
+      document.getElementById('ok').classList.add('show');
+      form.reset();
+      btn.textContent = 'Send →';
+      btn.style.opacity = '1';
+    } else {
+      const data = await res.json();
+      btn.textContent = 'Send →';
+      btn.style.opacity = '1';
+      alert('Something went wrong. Please email info@tachpasit.com directly.');
+    }
+  } catch(err) {
+    btn.textContent = 'Send →';
+    btn.style.opacity = '1';
+    alert('Something went wrong. Please email info@tachpasit.com directly.');
+  }
+});
 document.getElementById('yr').textContent=new Date().getFullYear();
 </script>
 </body>
