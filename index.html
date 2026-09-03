@@ -199,7 +199,7 @@ nav{
 .ps:last-child{border-right:none;}
 .ps-n{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--red);line-height:1;margin-bottom:10px;}
 .ps-h{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.05em;color:var(--paper);margin-bottom:8px;}
-.ps p{font-size:1.05rem;line-height:1.9;color:var(--mute);}
+.ps p{font-size:1.05rem;line-height:2.4;color:var(--mute);}
 
 /* ── CONTACT ── */
 .contact{background:var(--red);border-bottom:1px solid var(--rule);}
@@ -239,16 +239,17 @@ form.eq{display:flex;flex-direction:column;gap:20px;}
 
 /* ── FOOTER ── */
 footer{
-  background:var(--void);padding:14px 5vw;
+  background:var(--void);padding:18px 5vw;
   display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  border-top:2px solid var(--paper);
 }
-footer p{font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rule);}
+footer p{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--paper);opacity:.7;}
 .foot-r{display:flex;gap:0;}
 .foot-r a{
-  font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--rule);padding:0 14px;border-left:1px solid var(--rule);transition:color .2s;
+  font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--paper);opacity:.7;padding:0 16px;border-left:1px solid rgba(0,0,0,.2);transition:opacity .2s;
 }
-.foot-r a:hover{color:var(--void);}
+.foot-r a:hover{opacity:1;}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
@@ -306,34 +307,56 @@ footer p{font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:var
     <span class="work-head-l">Selected work</span>
     <span class="work-head-r">2024 &mdash; 2026</span>
   </div>
+
+  <!-- Row 1: full-width hero — amber room, dark warm -->
   <div class="wg wg-wide" data-r>
-    <div class="pf r-3-2"><div class="ph-inner"></div><span class="pf-n">01</span><div class="pf-cap"><span class="v">Loch Palm Golf Club</span><span class="d">Mar 2026</span></div></div>
+    <div class="pf r-3-2">
+      <img src="photos/work-03.jpg" alt="Wedding preparation" loading="lazy">
+      <span class="pf-n">01</span>
+    </div>
   </div>
+
+  <!-- Row 2: 5-strip — color arc: warm dark → golden → cool bright → warm bright → neutral -->
   <div class="wg wg-5" data-r>
-    <div class="pf r-1-1"><div class="ph-inner" style="background:#161310;"></div><span class="pf-n">02</span><div class="pf-cap"><span class="v">Blue Canyon CC</span><span class="d">Feb 2026</span></div></div>
-    <div class="pf r-1-1"><div class="ph-inner" style="background:#111;"></div><span class="pf-n">03</span><div class="pf-cap"><span class="v">Trisara</span><span class="d">Jan 2026</span></div></div>
-    <div class="pf r-1-1"><div class="ph-inner" style="background:#0d0d0d;"></div><span class="pf-n">04</span><div class="pf-cap"><span class="v">The Sarojin</span><span class="d">Dec 2025</span></div></div>
-    <div class="pf r-1-1"><div class="ph-inner" style="background:#161310;"></div><span class="pf-n">05</span><div class="pf-cap"><span class="v">Rosewood Phuket</span><span class="d">Nov 2025</span></div></div>
-    <div class="pf r-1-1"><div class="ph-inner" style="background:#111;"></div><span class="pf-n">06</span><div class="pf-cap"><span class="v">Amanpuri</span><span class="d">Oct 2025</span></div></div>
+    <div class="pf r-1-1">
+      <img src="photos/work-01.jpg" alt="Wedding reception" loading="lazy">
+      <span class="pf-n">02</span>
+    </div>
+    <div class="pf r-1-1">
+      <img src="photos/work-02.jpg" alt="Bride portrait" loading="lazy">
+      <span class="pf-n">03</span>
+    </div>
+    <div class="pf r-1-1">
+      <img src="photos/work-04.jpg" alt="Wedding day" loading="lazy">
+      <span class="pf-n">04</span>
+    </div>
+    <div class="pf r-1-1">
+      <img src="photos/work-05.jpg" alt="Wedding reception" loading="lazy">
+      <span class="pf-n">05</span>
+    </div>
+    <div class="pf r-1-1">
+      <img src="photos/work-06.jpg" alt="Bride" loading="lazy">
+      <span class="pf-n">06</span>
+    </div>
   </div>
-  <div class="wg wg-asym" data-r>
-    <div class="pf r-2-3"><div class="ph-inner" style="background:#0d0d0d;"></div><span class="pf-n">07</span><div class="pf-cap"><span class="v">Sri Panwa</span><span class="d">Sep 2025</span></div></div>
-    <div class="pf r-5-4"><div class="ph-inner" style="background:#161310;"></div><span class="pf-n">08</span><div class="pf-cap"><span class="v">Keemala</span><span class="d">Aug 2025</span></div></div>
+
+  <!-- Row 3: single centered portrait — dark red close -->
+  <div style="display:flex;justify-content:center;background:var(--void);padding:2px 0;">
+    <div class="pf r-2-3" style="width:38%;min-width:240px;">
+      <img src="photos/work-07.jpg" alt="Wedding detail" loading="lazy">
+      <span class="pf-n">07</span>
+    </div>
   </div>
-  <div class="wg wg-3" data-r>
-    <div class="pf r-4-5"><div class="ph-inner" style="background:#111;"></div><span class="pf-n">09</span><div class="pf-cap"><span class="v">Anantara Mai Khao</span><span class="d">Jul 2025</span></div></div>
-    <div class="pf r-4-5"><div class="ph-inner" style="background:#0d0d0d;"></div><span class="pf-n">10</span><div class="pf-cap"><span class="v">Intercontinental</span><span class="d">Jun 2025</span></div></div>
-    <div class="pf r-4-5"><div class="ph-inner" style="background:#161310;"></div><span class="pf-n">11</span><div class="pf-cap"><span class="v">Conrad Koh Samui</span><span class="d">May 2025</span></div></div>
-  </div>
+
   <div class="work-foot">
-    <span>Country clubs &middot; villas &middot; hotel estates &middot; Phuket &middot; Koh Samui &middot; Europe</span>
+    <span>Documentary · Film · Thailand · Europe · Worldwide</span>
     <span class="r">@tachpasit</span>
   </div>
 </section>
 
 <section class="about" id="studio">
   <div class="about-img">
-    <div class="ph-dark"></div>
+    <img src="photos/about-me.jpg" alt="Tachpasit — documentary wedding photographer" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;">
     <span class="tag">Phuket · Thailand · Est. 2016</span>
   </div>
   <div class="about-txt" data-r>
