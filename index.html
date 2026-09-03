@@ -191,58 +191,9 @@ nav{
 
 
 
-/* ── PROCESS ── */
-.process{background:var(--void);padding:0;border-bottom:1px solid var(--rule);}
-.process-head{
-  padding:32px 5vw 14px;
-  display:flex;justify-content:space-between;align-items:flex-end;
-  border-bottom:1px solid var(--rule);
-}
-.process-hl{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);color:var(--paper);}
-.process-hl .r{color:var(--red);}
-.process-steps{display:grid;grid-template-columns:repeat(4,1fr);}
-.ps{padding:28px 24px 28px 0;border-right:1px solid var(--rule);}
-.ps:first-child{padding-left:5vw;}
-.ps:last-child{border-right:none;}
-.ps-n{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--red);line-height:1;margin-bottom:10px;}
-.ps-h{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.05em;color:var(--paper);margin-bottom:8px;}
-.ps p{font-size:1.05rem;line-height:2.4;color:var(--mute);}
 
-/* ── CONTACT ── */
-.contact{background:var(--red);border-bottom:1px solid var(--rule);}
-.contact-inner{display:grid;grid-template-columns:1fr 1px 1fr;}
-.ct-divider{background:rgba(0,0,0,.15);}
-.contact-left{padding:60px 5vw;}
-.ct-hl{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,6vw,5rem);line-height:.88;color:var(--void);margin-bottom:6px;}
-.ct-email{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(1.6rem,4vw,3.2rem);line-height:.88;
-  color:var(--paper);display:inline-block;
-  border-bottom:2px solid transparent;transition:border-color .2s;margin-bottom:28px;
-}
-.ct-email:hover{border-color:var(--paper);}
-.ct-meta{font-size:.87rem;line-height:2.2;color:rgba(0,0,0,.5);}
-.ct-meta a{border-bottom:1px solid rgba(0,0,0,.2);transition:color .2s,border-color .2s;}
-.ct-meta a:hover{color:var(--void);border-color:var(--void);}
-.contact-right{padding:60px 5vw;}
-form.eq{display:flex;flex-direction:column;gap:20px;}
-.fl label{display:block;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.9);margin-bottom:6px;}
-.fl input,.fl textarea{
-  width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.4);
-  color:#000;font-family:'Space Mono',monospace;font-size:1.05rem;
-  padding:6px 0;resize:none;transition:border-color .3s;
-}
-.fl input::placeholder,.fl textarea::placeholder{color:rgba(255,255,255,.45);}
-.fl input:focus,.fl textarea:focus{border-color:#fff;outline:none;}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.btn-send{
-  font-family:'Space Mono',monospace;font-size:.87rem;letter-spacing:.1em;text-transform:uppercase;
-  background:#000;color:var(--void);border:none;
-  padding:11px 22px;cursor:pointer;transition:background .2s;display:inline-block;
-}
-.btn-send:hover{background:#222;}
-.form-ok{font-size:.56rem;letter-spacing:.1em;color:#000;margin-top:8px;display:none;}
-.form-ok.show{display:block;}
+
+
 
 /* ── FOOTER ── */
 footer{
@@ -257,6 +208,72 @@ footer p{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:va
   color:var(--paper);opacity:.7;padding:0 16px;border-left:1px solid rgba(0,0,0,.2);transition:opacity .2s;
 }
 .foot-r a:hover{opacity:1;}
+
+
+/* ── ABOUT + CONTACT ── */
+.about-contact{
+  display:grid;
+  grid-template-columns:260px 1fr 1fr;
+  border-bottom:1px solid var(--rule);
+  background:var(--void);
+  align-items:start;
+}
+.about-img{
+  position:relative;overflow:hidden;
+  height:100%;min-height:420px;
+  border-right:1px solid var(--rule);
+  background:var(--void);
+  flex-shrink:0;
+}
+.about-txt{
+  padding:36px 32px;
+  border-right:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:16px;
+}
+.contact-panel{padding:36px 32px;display:flex;flex-direction:column;gap:16px;}
+.abt-eyebrow{font-size:.60rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);display:block;}
+.abt-hl{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.6rem);line-height:.88;color:var(--paper);}
+.abt-hl .r{color:var(--red);}
+.abt-body{font-size:.78rem;line-height:2.1;color:var(--mute);}
+.abt-body strong{color:var(--paper);}
+.abt-body p+p{margin-top:1em;}
+.ct-hl{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3.5vw,3rem);line-height:.88;color:var(--paper);margin-bottom:4px;}
+.ct-email{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(1.2rem,2.5vw,2rem);line-height:.88;
+  color:var(--red);display:inline-block;
+  border-bottom:2px solid transparent;transition:border-color .2s;margin-bottom:12px;
+}
+.ct-email:hover{border-color:var(--red);}
+.ct-meta{font-size:.70rem;line-height:2.2;color:var(--mute);}
+.ct-meta a{border-bottom:1px solid var(--rule);transition:color .2s,border-color .2s;color:var(--mute);}
+.ct-meta a:hover{color:var(--paper);border-color:var(--paper);}
+form.eq{display:flex;flex-direction:column;gap:16px;}
+.fl label{display:block;font-size:.60rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:4px;}
+.fl input,.fl textarea{
+  width:100%;background:transparent;border:none;border-bottom:1px solid var(--rule);
+  color:var(--paper);font-family:'Space Mono',monospace;font-size:.78rem;
+  padding:5px 0;resize:none;transition:border-color .3s;
+}
+.fl input::placeholder,.fl textarea::placeholder{color:var(--rule);}
+.fl input:focus,.fl textarea:focus{border-color:var(--paper);outline:none;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.btn-send{
+  font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--paper);color:var(--void);border:none;
+  padding:11px 22px;cursor:pointer;transition:opacity .2s;display:inline-block;margin-top:4px;
+}
+.btn-send:hover{opacity:.85;}
+.form-ok{font-size:.60rem;letter-spacing:.1em;color:var(--red);margin-top:4px;display:none;}
+.form-ok.show{display:block;}
+
+/* ── responsive ── */
+@media(max-width:900px){
+  .about-contact{grid-template-columns:1fr;}
+  .about-img{min-height:260px;height:260px;border-right:none;border-bottom:1px solid var(--rule);}
+  .about-txt{border-right:none;border-bottom:1px solid var(--rule);}
+  .two{grid-template-columns:1fr;}
+}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
@@ -340,68 +357,54 @@ footer p{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:va
   </div>
 </section>
 
-<section class="about" id="studio">
+<section class="about-contact" id="studio">
+
+  <!-- Portrait -->
   <div class="about-img">
     <img src="photos/about-me.jpg" alt="Tachpasit — documentary wedding photographer" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;filter:sepia(.55) contrast(1.05);">
     <span class="tag">Phuket · Thailand · Est. 2016</span>
   </div>
+
+  <!-- About text -->
   <div class="about-txt" data-r>
-    <div>
-      <span class="abt-eyebrow">Tachpasit &mdash; Documentary Wedding Photography</span>
-      <h2 class="abt-hl">About <span class="r">me.</span></h2>
-      <div class="abt-body">
-        <p>Photography is about four things: time, place, subject, and where you happen to be standing. Get those right — or wrong in the right way — and the picture exists. Everything else is secondary.</p>
-        <p>Sometimes the imperfect frame is exactly the right one. Not because imperfection is a style, but because <strong>the moment that arrived slightly ahead of the camera, or from the wrong angle, or before anyone was ready — that one often carries something the careful version doesn't.</strong> There's a peculiar kind of perfection in that.</p>
-        <p>The job, mostly, is to stay humble, stay low, and not get in the way of what's already happening. <strong>A wedding doesn't need directing. It needs someone paying close enough attention to be there when it does.</strong></p>
-        <p>Based in Phuket since 2016, photographing weddings across Thailand, Europe, and destinations around the world.</p>
+    <span class="abt-eyebrow">Tachpasit &mdash; Documentary Wedding Photography</span>
+    <h2 class="abt-hl">About <span class="r">me.</span></h2>
+    <div class="abt-body">
+      <p>Photography is about four things: time, place, subject, and where you happen to be standing. Get those right — or wrong in the right way — and the picture exists. Everything else is secondary.</p>
+      <p>Sometimes the imperfect frame is exactly the right one. Not because imperfection is a style, but because <strong>the moment that arrived slightly ahead of the camera, or from the wrong angle, or before anyone was ready — that one often carries something the careful version doesn't.</strong> There's a peculiar kind of perfection in that.</p>
+      <p>The job, mostly, is to stay humble, stay low, and not get in the way of what's already happening. <strong>A wedding doesn't need directing. It needs someone paying close enough attention to be there when it does.</strong></p>
+      <p>Based in Phuket since 2016, photographing weddings across Thailand, Europe, and destinations around the world.</p>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="contact-panel" data-r>
+    <h2 class="ct-hl">WRITE TO</h2>
+    <a href="mailto:info@tachpasit.com" class="ct-email">TACHPASIT.</a>
+    <p class="ct-meta">
+      <a href="mailto:info@tachpasit.com">info@tachpasit.com</a> &nbsp;&middot;&nbsp;
+      <a href="https://wa.me/66924655359">+66 92 465 5359</a> &nbsp;&middot;&nbsp;
+      <a href="https://instagram.com/tachpasit" target="_blank" rel="noopener">@tachpasit</a>
+    </p>
+    <form class="eq" id="eq">
+      <input type="hidden" name="_subject" value="New enquiry from tachpasit.com">
+      <div class="two">
+        <div class="fl"><label>Names</label><input type="text" name="names" placeholder="Both names" required></div>
+        <div class="fl"><label>Date</label><input type="date" name="wedding_date"></div>
       </div>
-    </div>
+      <div class="fl"><label>Venue / location</label><input type="text" name="venue" placeholder="e.g. Loch Palm Golf Club, Phuket"></div>
+      <div class="fl"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
+      <div class="fl"><label>Tell me about your day</label><textarea rows="2" name="message" placeholder="Venue, vibe, anything"></textarea></div>
+      <div>
+        <button type="submit" class="btn-send">Send &rarr;</button>
+        <p class="form-ok" id="ok">Received &mdash; reply within 48 hours.</p>
+      </div>
+    </form>
   </div>
+
 </section>
 
-<section class="process" id="process">
-  <div class="process-head" data-r>
-    <h2 class="process-hl">HOW IT <span class="r">WORKS</span></h2>
-    <span style="font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);">Four stages &mdash; every time</span>
-  </div>
-  <div class="process-steps" data-r>
-    <div class="ps"><div class="ps-n">01</div><div class="ps-h">Enquiry</div><p>A conversation about the date, venue, and shape of the day. No forms, no packages.</p></div>
-    <div class="ps"><div class="ps-n">02</div><div class="ps-h">Pre-shoot</div><p>An optional session before the wedding. Mostly just for the two of you.</p></div>
-    <div class="ps"><div class="ps-n">03</div><div class="ps-h">The day</div><p>Coverage stays quiet — following the day as it unfolds. Nothing staged.</p></div>
-    <div class="ps"><div class="ps-n">04</div><div class="ps-h">Delivery</div><p>A full gallery, hand-edited. Delivered to a private client portal. Yours to keep.</p></div>
-  </div>
-</section>
 
-<section class="contact" id="contact">
-  <div class="contact-inner" data-r>
-    <div class="contact-left">
-      <h2 class="ct-hl">WRITE TO</h2>
-      <a href="mailto:info@tachpasit.com" class="ct-email">TACHPASIT.</a>
-      <p class="ct-meta">
-        <a href="mailto:info@tachpasit.com">info@tachpasit.com</a> &nbsp;&middot;&nbsp;
-        <a href="https://wa.me/66924655359">+66 92 465 5359</a> &nbsp;&middot;&nbsp;
-        <a href="https://instagram.com/tachpasit" target="_blank" rel="noopener">@tachpasit</a>
-      </p>
-    </div>
-    <div class="ct-divider"></div>
-    <div class="contact-right">
-      <form class="eq" id="eq">
-        <input type="hidden" name="_subject" value="New enquiry from tachpasit.com">
-        <div class="two">
-          <div class="fl"><label>Names</label><input type="text" name="names" placeholder="Both names" required></div>
-          <div class="fl"><label>Date</label><input type="date" name="wedding_date"></div>
-        </div>
-        <div class="fl"><label>Venue / location</label><input type="text" name="venue" placeholder="e.g. Loch Palm Golf Club, Phuket"></div>
-        <div class="fl"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
-        <div class="fl"><label>Tell me about your day</label><textarea rows="3" name="message" placeholder="Venue, vibe, anything"></textarea></div>
-        <div>
-          <button type="submit" class="btn-send">Send &rarr;</button>
-          <p class="form-ok" id="ok">Received &mdash; reply within 48 hours.</p>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
 
 <footer>
   <p>&copy; <span id="yr"></span> Tachpasit. All rights reserved.</p>
