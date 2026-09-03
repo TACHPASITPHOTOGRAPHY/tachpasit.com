@@ -153,17 +153,18 @@ nav{
 
 /* ── ABOUT ── */
 .about{
-  display:grid;grid-template-columns:200px 1fr;
+  display:grid;grid-template-columns:220px 1fr;
   border-bottom:1px solid var(--rule);
   background:var(--void);
-  align-items:start;
+  align-items:center;
 }
 .about-img{
   position:relative;overflow:hidden;
   border-right:1px solid var(--rule);
-  height:200px;
-  width:200px;
+  height:240px;
+  width:220px;
   flex-shrink:0;
+  background:var(--void);
 }
 .about-img .tag{
   position:absolute;bottom:0;left:0;z-index:2;
@@ -175,7 +176,7 @@ nav{
   position:absolute;inset:0;background:#111;
   background-image:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.004) 2px,rgba(255,255,255,.004) 3px);
 }
-.about-txt{padding:52px 5vw;display:flex;flex-direction:column;justify-content:space-between;}
+.about-txt{padding:40px 5vw 40px 4vw;display:flex;flex-direction:column;justify-content:space-between;}
 .abt-eyebrow{font-size:.60rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:18px;display:block;}
 .abt-hl{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,4.4rem);line-height:.88;color:var(--paper);margin-bottom:26px;}
 .abt-hl .r{color:var(--red);}
@@ -310,20 +311,20 @@ footer p{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:va
     <span class="work-head-r">2024 &mdash; 2026</span>
   </div>
 
-  <!-- Row 1: full-width hero — amber room, dark warm -->
-  <div class="wg wg-wide" data-r>
+  <!-- Row 1: two hero photos — warm dark amber + warm dark couple -->
+  <div class="wg" style="grid-template-columns:3fr 2fr;" data-r>
     <div class="pf r-3-2">
       <img src="photos/work-03.jpg" alt="Wedding preparation" loading="lazy">
       <span class="pf-n">01</span>
     </div>
-  </div>
-
-  <!-- Row 2: 5-strip — color arc: warm dark → golden → cool bright → warm bright → neutral -->
-  <div class="wg wg-5" data-r>
-    <div class="pf r-1-1">
+    <div class="pf r-3-2">
       <img src="photos/work-01.jpg" alt="Wedding reception" loading="lazy">
       <span class="pf-n">02</span>
     </div>
+  </div>
+
+  <!-- Row 2: 5-strip — color arc: golden → cool bright → warm bright → neutral → dark red -->
+  <div class="wg wg-5" data-r>
     <div class="pf r-1-1">
       <img src="photos/work-02.jpg" alt="Bride portrait" loading="lazy">
       <span class="pf-n">03</span>
@@ -358,7 +359,7 @@ footer p{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:va
 
 <section class="about" id="studio">
   <div class="about-img">
-    <img src="photos/about-me.jpg" alt="Tachpasit — documentary wedding photographer" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;">
+    <img src="photos/about-me.jpg" alt="Tachpasit — documentary wedding photographer" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%;mix-blend-mode:luminosity;opacity:.85;">
     <span class="tag">Phuket · Thailand · Est. 2016</span>
   </div>
   <div class="about-txt" data-r>
