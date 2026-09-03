@@ -4,216 +4,80 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TACHPASIT — Portfolio</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzAwMDAwMCIvPgogIDx0ZXh0IHg9IjUwIiB5PSI3MiIgZm9udC1mYW1pbHk9IkFyaWFsIEJsYWNrLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjkwMCIKICAgIGZvbnQtc2l6ZT0iNDQiIGZpbGw9IiNGRkQxMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSItMiI+VFA8L3RleHQ+Cjwvc3ZnPg==">
-  <link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzAwMDAwMCIvPgogIDx0ZXh0IHg9IjUwIiB5PSI3MiIgZm9udC1mYW1pbHk9IkFyaWFsIEJsYWNrLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjkwMCIKICAgIGZvbnQtc2l6ZT0iNDQiIGZpbGw9IiNGRkQxMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSItMiI+VFA8L3RleHQ+Cjwvc3ZnPg==">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --void:#FFD100;
-  --paper:#000000;
-  --red:#E31837;
-  --mute:#7A6B00;
-  --rule:rgba(0,0,0,.15);
-  --ease:cubic-bezier(.22,1,.36,1);
-}
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+html,body{height:100%;}
 body{
-  background:var(--void);
-  color:var(--paper);
+  background:#FFD100;
   font-family:'Space Mono',monospace;
   -webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;
 }
 a{color:inherit;text-decoration:none;}
-img{display:block;width:100%;height:100%;object-fit:cover;}
-::selection{background:var(--red);color:var(--paper);}
 
-/* grain */
-body::after{
-  content:"";position:fixed;inset:0;
-  pointer-events:none;z-index:999;
-  opacity:.065;mix-blend-mode:multiply;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-}
-
-/* ── NAV ── */
 nav{
-  position:sticky;top:0;z-index:300;
-  background:var(--void);
-  border-bottom:1px solid var(--rule);
-  padding:14px 5vw;
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
+  padding:16px 5vw;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  border-bottom:2px solid #000;
+  flex-shrink:0;
 }
 .nav-back{
   font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--mute);transition:color .2s;
+  color:#000;opacity:.5;transition:opacity .2s;
   display:flex;align-items:center;gap:6px;
 }
-.nav-back::before{content:"←";font-size:.6rem;}
-.nav-back:hover{color:var(--paper);}
+.nav-back::before{content:"←";font-size:.85rem;}
+.nav-back:hover{opacity:1;}
 .nav-logo{
   font-family:'Bebas Neue',sans-serif;
-  font-size:1.1rem;letter-spacing:.28em;color:var(--paper);
-  opacity:.8;text-align:center;transition:opacity .2s;
+  font-size:1.2rem;letter-spacing:.28em;color:#000;text-align:center;
 }
-.nav-logo:hover{opacity:1;}
-.nav-right{display:flex;align-items:center;gap:18px;justify-content:flex-end;}
+.nav-right{display:flex;align-items:center;gap:20px;justify-content:flex-end;}
 .nav-right a{
   font-size:.94rem;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--mute);transition:color .2s;display:flex;align-items:center;
+  color:#000;opacity:.4;transition:opacity .2s;display:flex;align-items:center;
 }
-.nav-right a:hover{color:var(--paper);}
-.nav-right a.wa{color:var(--red);}
-.nav-right a.wa:hover{color:var(--paper);}
+.nav-right a:hover{opacity:1;}
+.nav-right a.wa{color:#E31837;opacity:1;}
 
-/* ── PAGE HEADER ── */
-.page-head{
-  padding:48px 5vw 36px;
-  border-bottom:1px solid var(--rule);
-  display:flex;justify-content:space-between;align-items:flex-end;
-  flex-wrap:wrap;gap:12px;
+/* Coming soon */
+.coming{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:5vw;text-align:center;
 }
-.page-title{
+.coming h1{
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(2rem,5vw,3.6rem);
-  line-height:.9;color:var(--paper);letter-spacing:.02em;
+  font-size:clamp(3rem,12vw,9rem);
+  line-height:.88;color:#000;margin-bottom:24px;
 }
-.page-count{
-  font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);
+.coming h1 .r{color:#E31837;}
+.coming p{
+  font-size:.9rem;line-height:1.9;color:#7A6B00;
+  max-width:480px;margin-bottom:36px;
 }
+.coming a.cta{
+  font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;
+  color:#E31837;border:2px solid #E31837;padding:12px 28px;
+  transition:background .2s,color .2s;
+}
+.coming a.cta:hover{background:#E31837;color:#fff;}
 
-/* ── PORTFOLIO GRID ── */
-.portfolio-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:2px;
-  background:var(--rule);
-  padding:2px;
-}
-
-/* ── PORTFOLIO CARD ── */
-.pcard{
-  position:relative;overflow:hidden;
-  background:#181512;
-  cursor:pointer;
-  display:block;
-  text-decoration:none;
-}
-.pcard-img{
-  position:relative;
-  aspect-ratio:3/2;
-  overflow:hidden;
-}
-.pcard-img img{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  filter:contrast(1.15) grayscale(1);
-  transition:transform .7s var(--ease), filter .4s;
-  opacity:0;
-}
-.pcard-img img.loaded{opacity:1;}
-.pcard:hover .pcard-img img{
-  transform:scale(1.05);
-  filter:contrast(1.05) grayscale(.6);
-}
-
-/* dark overlay on hover */
-.pcard-img::after{
-  content:"";
-  position:absolute;inset:0;
-  background:rgba(12,10,8,0);
-  transition:background .4s;
-  z-index:1;
-}
-.pcard:hover .pcard-img::after{
-  background:rgba(12,10,8,.32);
-}
-
-/* view label appears on hover */
-.pcard-view{
-  position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%) scale(.92);
-  z-index:2;
-  background:transparent;
-  border:1px solid rgba(237,232,223,.7);
-  color:var(--paper);
-  font-family:'Space Mono',monospace;
-  font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;
-  padding:9px 18px;
-  opacity:0;
-  transition:opacity .3s, transform .3s var(--ease);
-  white-space:nowrap;
-}
-.pcard:hover .pcard-view{
-  opacity:1;
-  transform:translate(-50%,-50%) scale(1);
-}
-
-/* red corner number */
-.pcard-num{
-  position:absolute;top:10px;left:10px;z-index:3;
-  font-size:.46rem;letter-spacing:.1em;
-  color:rgba(237,232,223,.25);
-  font-family:'Space Mono',monospace;
-}
-
-/* ── CARD INFO ── */
-.pcard-info{
-  padding:14px 16px 16px;
-  border-top:1px solid var(--rule);
-  display:flex;justify-content:space-between;align-items:flex-end;
-}
-.pcard-venue{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:1.05rem;letter-spacing:.04em;color:var(--paper);
-  line-height:1;display:block;margin-bottom:4px;
-}
-.pcard-meta{
-  font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);
-}
-.pcard-arrow{
-  font-size:.9rem;color:var(--rule);
-  transition:color .2s, transform .3s var(--ease);
-  flex-shrink:0;margin-left:12px;
-}
-.pcard:hover .pcard-arrow{color:var(--red);transform:translateX(4px);}
-
-/* featured card — first one, larger */
-.pcard.featured{grid-column:span 2;}
-.pcard.featured .pcard-img{aspect-ratio:16/7;}
-
-/* ── FOOTER ── */
 footer{
-  padding:14px 5vw;border-top:1px solid var(--rule);
+  padding:18px 5vw;border-top:2px solid #000;
   display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:10px;margin-top:2px;
+  flex-wrap:wrap;gap:10px;flex-shrink:0;
 }
-footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rule);}
+footer p{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#000;opacity:.4;}
 .foot-r{display:flex;gap:0;}
 .foot-r a{
-  font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--rule);padding:0 14px;border-left:1px solid var(--rule);
-  transition:color .2s;
+  font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;
+  color:#000;opacity:.4;padding:0 16px;border-left:1px solid rgba(0,0,0,.2);transition:opacity .2s;
 }
-.foot-r a:hover{color:var(--paper);}
-
-/* ── RESPONSIVE ── */
-@media(max-width:800px){
-  .portfolio-grid{grid-template-columns:repeat(2,1fr);}
-  .pcard.featured{grid-column:span 2;}
-}
-@media(max-width:500px){
-  .portfolio-grid{grid-template-columns:1fr;}
-  .pcard.featured{grid-column:span 1;}
-  .pcard.featured .pcard-img{aspect-ratio:3/2;}
-  .nav-right{display:none;}
-}
+.foot-r a:hover{opacity:1;}
 </style>
 </head>
 <body>
@@ -222,131 +86,29 @@ footer p{font-size:.44rem;letter-spacing:.14em;text-transform:uppercase;color:va
   <a href="index.html" class="nav-back">Back</a>
   <a href="index.html" class="nav-logo">TACHPASIT</a>
   <div class="nav-right">
-    <a href="https://instagram.com/tachpasit" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:5px;flex-shrink:0"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram</a>
-    <a href="https://wa.me/66924655359" target="_blank" rel="noopener" class="wa"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:5px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+    <a href="https://instagram.com/tachpasit" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:5px;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram
+    </a>
+    <a href="https://wa.me/66924655359" target="_blank" rel="noopener" class="wa">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:5px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp
+    </a>
   </div>
 </nav>
 
-<div class="page-head">
-  <h1 class="page-title">Selected<br>Portfolio</h1>
-  <span class="page-count" id="totalCount"></span>
+<div class="coming">
+  <h1>COMING<br><span class="r">SOON.</span></h1>
+  <p>The portfolio is being prepared. In the meantime — get in touch to see the work directly.</p>
+  <a href="index.html#contact" class="cta">Get in touch</a>
 </div>
-
-<div class="portfolio-grid" id="portfolioGrid"></div>
 
 <footer>
   <p>&copy; <span id="yr"></span> Tachpasit. All rights reserved.</p>
   <div class="foot-r">
-    <a href="https://instagram.com/tachpasit" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:5px;flex-shrink:0"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram</a>
-    <a href="https://wa.me/66924655359" target="_blank" rel="noopener" style="color:var(--red)"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:5px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
-    <a href="#" onclick="window.scrollTo(0,0);return false;">Top ↑</a>
+    <a href="https://instagram.com/tachpasit" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://wa.me/66924655359" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="index.html">Home</a>
   </div>
 </footer>
-
-<script>
-/* ─────────────────────────────────────────────────────
-   PORTFOLIOS — add each wedding here.
-   cover: path to the cover image
-   venue: venue name
-   date:  displayed date string
-   loc:   location
-   href:  link to the individual portfolio page
-   count: number of photos
-   ───────────────────────────────────────────────────── */
-const portfolios = [
-  {
-    cover:'https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?w=1600&h=700&fit=crop&q=80',
-    venue:'Loch Palm Golf Club',
-    href:'portfolio-loch-palm.html',
-    date:'March 2026',loc:'Phuket, Thailand',
-    href:'portfolio-detail.html',count:24,featured:true
-  },
-  {
-    cover:'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=900&h=600&fit=crop&q=80',
-    venue:'Trisara',
-    href:'portfolio-trisara.html',
-    date:'January 2026',loc:'Phuket, Thailand',
-    href:'portfolio-detail.html',count:28
-  },
-  {
-    cover:'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=900&h=600&fit=crop&q=80',
-    venue:'Blue Canyon CC',
-    href:'portfolio-blue-canyon.html',
-    date:'February 2026',loc:'Phuket, Thailand',
-    href:'portfolio-detail.html',count:22
-  },
-  {
-    cover:'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=900&h=600&fit=crop&q=80',
-    venue:'The Sarojin',
-    href:'portfolio-sarojin.html',
-    date:'December 2025',loc:'Khao Lak, Thailand',
-    href:'portfolio-detail.html',count:30
-  },
-  {
-    cover:'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=900&h=600&fit=crop&q=80',
-    venue:'Rosewood Phuket',
-    href:'portfolio-rosewood.html',
-    date:'November 2025',loc:'Phuket, Thailand',
-    href:'portfolio-detail.html',count:26
-  },
-  {
-    cover:'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=900&h=600&fit=crop&q=80',
-    venue:'Amanpuri',
-    date:'October 2025',loc:'Phuket, Thailand',
-    href:'portfolio-detail.html',count:20
-  },
-  {
-    cover:'https://images.unsplash.com/photo-1478145787956-f5f34b8d8b22?w=900&h=600&fit=crop&q=80',
-    venue:'Sri Panwa',
-    date:'September 2025',loc:'Phuket, Thailand',
-    href:'portfolio-detail.html',count:24
-  },
-  {
-    cover:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&h=600&fit=crop&q=80',
-    venue:'Keemala',
-    date:'August 2025',loc:'Phuket, Thailand',
-    href:'portfolio-detail.html',count:22
-  },
-];
-
-const grid = document.getElementById('portfolioGrid');
-
-portfolios.forEach((p, i) => {
-  const card = document.createElement('a');
-  card.href = p.href;
-  card.className = 'pcard' + (p.featured ? ' featured' : '');
-  card.innerHTML = `
-    <div class="pcard-img">
-      <img data-src="${p.cover}" alt="${p.venue}">
-      <span class="pcard-num">${String(i+1).padStart(2,'0')}</span>
-      <div class="pcard-view">View portfolio</div>
-    </div>
-    <div class="pcard-info">
-      <div>
-        <span class="pcard-venue">${p.venue}</span>
-        <span class="pcard-meta">${p.date} &nbsp;·&nbsp; ${p.loc} &nbsp;·&nbsp; ${p.count} photos</span>
-      </div>
-      <span class="pcard-arrow">→</span>
-    </div>`;
-  grid.appendChild(card);
-});
-
-document.getElementById('totalCount').textContent = portfolios.length + ' weddings';
-
-/* lazy load */
-const obs = new IntersectionObserver((entries, o) => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    const img = e.target;
-    img.src = img.dataset.src;
-    img.onload = () => img.classList.add('loaded');
-    o.unobserve(img);
-  });
-}, { rootMargin:'200px' });
-
-document.querySelectorAll('img[data-src]').forEach(img => obs.observe(img));
-
-document.getElementById('yr').textContent = new Date().getFullYear();
-</script>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
 </body>
 </html>

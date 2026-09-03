@@ -153,7 +153,7 @@ nav{
 
 /* ── ABOUT ── */
 .about{
-  display:grid;grid-template-columns:1fr 1.5fr;
+  display:grid;grid-template-columns:200px 1fr;
   border-bottom:1px solid var(--rule);
   background:var(--void);
   align-items:start;
@@ -161,8 +161,9 @@ nav{
 .about-img{
   position:relative;overflow:hidden;
   border-right:1px solid var(--rule);
-  height:320px;
-  max-height:320px;
+  height:200px;
+  width:200px;
+  flex-shrink:0;
 }
 .about-img .tag{
   position:absolute;bottom:0;left:0;z-index:2;
